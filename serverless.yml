@@ -47,6 +47,7 @@ provider:
 # you can define service wide environment variables here
   environment:
     TELEGRAM_TOKEN: ${env:TELEGRAM_TOKEN}
+    IPL_ACCESS_TOKEN: ${env:IPL_ACCESS_TOKEN}
     #variable1: value1
 
 # you can add packaging information here
@@ -59,8 +60,9 @@ provider:
 #    - exclude-me-dir/**
 
 functions:
-  hello:
-    handler: handler.hello
+  main:
+    handler: handler.main
+    timeout: 45
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events

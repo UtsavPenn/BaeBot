@@ -1,31 +1,62 @@
 import json
 import os
 import sys
+import logging
 here = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(os.path.join(here, "./vendored"))
+sys.path.append(os.path.join(here, "./src"))
 
 import requests
+from telegram.bot import Bot
+from telegram.chat import Chat
+from telegram.update import Update
 
-TOKEN = os.environ['TELEGRAM_TOKEN']
-BASE_URL = "https://api.telegram.org/bot{}".format(TOKEN)
+from wrappers import CustomCommandHandler
+from ipl_fantasy.handlers import power_players, subs_left
 
-def hello(event, context):
+log = logging.getLogger(__name__)
+
+START_TEXT = """Ask me:
+/start
+/powerplayers - Example usage: /powerplayers or /powerplayers sujith
+/subsleft - Example Usage: /subsleft or /subsleft badri
+"""
+
+class Dispatcher(object):
+
+    def __init__(self, bot):
+        self.bot = bot
+        self.handlers = []
+
+    def add_handler(self, handler):
+        self.handlers.append(handler)
+
+    def process_update(self, update):
+        for handler in self.handlers:
+            if handler.check_update(update):
+                handler.handle_update(update, self.bot)
+
+
+
+def start_message(bot, update):
+    bot.send_message(update.message.chat_id, START_TEXT)
+
+
+def main(event, context):
+
     try:
+        bot = Bot(token=os.environ['TELEGRAM_TOKEN'])
+
+        dispatcher = Dispatcher(bot)
+        dispatcher.add_handler(CustomCommandHandler('start', start_message))
+        dispatcher.add_handler(CustomCommandHandler('powerplayers', power_players, pass_args=True))
+        dispatcher.add_handler(CustomCommandHandler('subsleft', subs_left, pass_args=True))
+
         data = json.loads(event["body"])
-        message = str(data["message"]["text"])
-        chat_id = data["message"]["chat"]["id"]
-        first_name = data["message"]["from"]["first_name"]
-        
-        response = "Please /start, {}".format(first_name)
-        
-        if "start" in message:
-            response = "Hello {}".format(first_name)
-        
-        data = {"text": response.encode("utf8"), "chat_id": chat_id}
-        url = BASE_URL + "/sendMessage"
-        requests.post(url, data)
-    
+        update = Update.de_json(data, bot)
+        dispatcher.process_update(update)
+
     except Exception as e:
-        print(e)
+        log.exception(e)
 
     return {"statusCode": 200}
