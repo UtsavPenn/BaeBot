@@ -16,7 +16,8 @@ from ipl_fantasy.handlers import (power_players,
                                 subs_left, 
                                 stealths_left,
                                 second_power_players,
-                                picked_players)
+                                picked_players,
+                                live_fantasy_scores)
 
 
 log = logging.getLogger(__name__)
@@ -24,6 +25,7 @@ log = logging.getLogger(__name__)
 START_TEXT = """Ask me:
 
 /start
+/livefantasyscores
 /powerplayers - Example usage: /powerplayers or /powerplayers sujith
 /secondpowerplayers - same as above
 /subsleft - Example Usage: /subsleft or /subsleft badri
@@ -68,6 +70,8 @@ def main(event, context):
 
         dispatcher = Dispatcher(bot)
         dispatcher.add_handler(CustomCommandHandler('start', start_message))
+        dispatcher.add_handler(CustomCommandHandler('livefantasyscores', live_fantasy_scores))
+
         dispatcher.add_handler(CustomCommandHandler('powerplayers', power_players, pass_args=True))
         dispatcher.add_handler(CustomCommandHandler('secondpowerplayers', second_power_players, pass_args=True))
 

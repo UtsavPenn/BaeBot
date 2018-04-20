@@ -5,3 +5,5 @@ from .subs_left_handler import subs_left
 from .stealth_left_handler import stealths_left
 
 from .picked_players_handler import picked_players
+
+from .live_fantasy_scores_handler import live_fantasy_scores

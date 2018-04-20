@@ -54,7 +54,7 @@ def get_league_details(league_id='ip3NjxML'):
 
 
 def get_live_score_for_user(user_id):
-    URL = "https://2fjfpxrbb3.execute-api.ap-southeast-1.amazonaws.com/production/useriplapi/getlivescore?matchId=7910&userid={}&matchLink=http://datacdn.iplt20.com/dynamic/data/core/cricket/2012/ipl2018/ipl2018-16/scoring.js".format(user_id)
+    URL = "https://2fjfpxrbb3.execute-api.ap-southeast-1.amazonaws.com/production/useriplapi/getlivescore?matchId=7910&userid={}&matchLink=http://datacdn.iplt20.com/dynamic/data/core/cricket/2012/ipl2018/ipl2018-17/scoring.js".format(user_id)
     data = get_request_data(URL, headers=API_HEADERS)
     return data['battingPoints'] + data['fieldingPoints'] + data['bowlingPoints']
 
