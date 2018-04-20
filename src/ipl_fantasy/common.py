@@ -1,6 +1,7 @@
 import re
 import tabulate
 from collections import defaultdict
+from fuzzywuzzy import process
 
 from ipl_fantasy.data import get_league_details, get_players, get_squad_details
 
@@ -68,6 +69,9 @@ def determine_team(short_name):
             return team
         if short_name == team:
             return team
+
+    return process.extractOne(short_name, TEAMS)[0]
+
 
 
 def get_ipl_player_to_users_mapping(teams=None):
