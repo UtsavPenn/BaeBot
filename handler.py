@@ -6,7 +6,7 @@ sys.path.append(os.path.join(here, "./vendored"))
 
 import requests
 
-TOKEN = '415651169:AAHTN7_qCOiRHLm5EyRrfNU71h2dQSkAVEs'
+TOKEN = os.environ['TELEGRAM_TOKEN']
 BASE_URL = "https://api.telegram.org/bot{}".format(TOKEN)
 
 def hello(event, context):
