@@ -4,3 +4,4 @@ tabulate
 bunch
 boto3
 fuzzywuzzy
+python-Levenshtein 
