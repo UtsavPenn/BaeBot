@@ -1,8 +1,5 @@
-from ipl_fantasy.common import (get_player,
-                                get_league_team_name_for_user,
-                                simple_table,
-                                determine_user, 
-                                USER_IDS)
+from ipl_fantasy.common import (get_player, get_league_team_name_for_user,
+                                simple_table, determine_user, USER_IDS)
 from ipl_fantasy.data import get_squad_details
 
 
@@ -22,4 +19,5 @@ def power_players(bot, update, args):
         bot.send_message(update.message.chat_id,
                          get_power_player_for_user(user))
     else:
-        bot.send_message(update.message.chat_id, simple_table(get_power_players()))
+        bot.send_message(update.message.chat_id,
+                         simple_table(get_power_players()))

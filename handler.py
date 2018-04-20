@@ -30,7 +30,7 @@ START_TEXT = """Ask me:
 
 /start
 /live
-/total
+/total - Example usage: /total [or] /total sujith
 /pp - Example usage: /pp or /pp sujith
 /spp - same as above
 /subsleft - Example Usage: /subsleft or /subsleft badri
@@ -69,7 +69,7 @@ def main(event, context):
         dispatcher = Dispatcher(bot)
         dispatcher.add_handler(CustomCommandHandler('start', start_message))
 
-        dispatcher.add_handler(CustomCommandHandler('total', cumulative_scores))
+        dispatcher.add_handler(CustomCommandHandler('total', cumulative_scores, pass_args=True))
         dispatcher.add_handler(CustomCommandHandler('live', live_fantasy_scores))
 
 

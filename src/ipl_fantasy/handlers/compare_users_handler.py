@@ -11,19 +11,25 @@ def get_common_players(user1, user2):
 
 def compare_users(bot, update, args):
     if not len(args) > 1:
-        bot.send_message(chat_id=update.message.chat_id,
-                         text="Example usage: /compare tharun utsav")
+        bot.send_message(
+            chat_id=update.message.chat_id,
+            text="Example usage: /compare tharun utsav")
         return
 
     user1 = determine_user(args[0])
     if not user1:
-        bot.send_message(chat_id=update.message.chat_id, text="Unable to determine user {}".format(args[0]))
+        bot.send_message(
+            chat_id=update.message.chat_id,
+            text="Unable to determine user {}".format(args[0]))
         return
-    
+
     user2 = determine_user(args[1])
     if not user2:
-        bot.send_message(chat_id=update.message.chat_id, text="Unable to determine user {}".format(args[1]))
+        bot.send_message(
+            chat_id=update.message.chat_id,
+            text="Unable to determine user {}".format(args[1]))
         return
-    
-    bot.send_message(chat_id=update.message.chat_id, text="Common Players: " + ", ".join(get_common_players(user1, user2)))
-    
+
+    bot.send_message(
+        chat_id=update.message.chat_id,
+        text="Common Players: " + ", ".join(get_common_players(user1, user2)))
