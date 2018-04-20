@@ -3,3 +3,5 @@ python-telegram-bot
 tabulate
 bunch
 boto3
+fuzzywuzzy
+python-Levenshtein 
