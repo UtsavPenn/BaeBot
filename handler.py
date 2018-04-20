@@ -17,7 +17,10 @@ from ipl_fantasy.handlers import (power_players,
                                 stealths_left,
                                 second_power_players,
                                 picked_players,
-                                live_fantasy_scores)
+                                live_fantasy_scores, 
+                                compare_users, 
+                                players_of,
+                                who_has)
 
 
 log = logging.getLogger(__name__)
@@ -25,22 +28,15 @@ log = logging.getLogger(__name__)
 START_TEXT = """Ask me:
 
 /start
-/livefantasyscores
-/powerplayers - Example usage: /powerplayers or /powerplayers sujith
-/secondpowerplayers - same as above
+/live
+/pp - Example usage: /powerplayers or /powerplayers sujith
+/spp - same as above
 /subsleft - Example Usage: /subsleft or /subsleft badri
 /stealthleft - Example Usage: /stealthleft or /stealthleft aayush
 /pickedplayers - Example Usage: /pickedplayers <teamname1> <teamname2>
-                            Where team name is any of:
-
-                                kings-xi-punjab or kxp
-                                rajasthan-royals or rr
-                                delhi-daredevils or dd
-                                chennai-super-kings or csk
-                                kolkata-knight-riders or kkr
-                                sunrisers-hyderabad or sh
-                                mumbai-indians or mi
-                                royal-challengers-bangalore or rcb
+/compare - Example usage: /compare badri tharun
+/playersof - Example usage: /playersof aditya [or] /playersof aditya csk
+/whohas - Example usage: /whohas stokes
 """
 
 class Dispatcher(object):
@@ -70,15 +66,19 @@ def main(event, context):
 
         dispatcher = Dispatcher(bot)
         dispatcher.add_handler(CustomCommandHandler('start', start_message))
-        dispatcher.add_handler(CustomCommandHandler('livefantasyscores', live_fantasy_scores))
+        dispatcher.add_handler(CustomCommandHandler('live', live_fantasy_scores))
 
-        dispatcher.add_handler(CustomCommandHandler('powerplayers', power_players, pass_args=True))
-        dispatcher.add_handler(CustomCommandHandler('secondpowerplayers', second_power_players, pass_args=True))
+        dispatcher.add_handler(CustomCommandHandler('pp', power_players, pass_args=True))
+        dispatcher.add_handler(CustomCommandHandler('spp', second_power_players, pass_args=True))
 
         dispatcher.add_handler(CustomCommandHandler('subsleft', subs_left, pass_args=True))
         dispatcher.add_handler(CustomCommandHandler('stealthleft', stealths_left, pass_args=True))
 
         dispatcher.add_handler(CustomCommandHandler('pickedplayers', picked_players, pass_args=True))
+        dispatcher.add_handler(CustomCommandHandler('compare', compare_users, pass_args=True))
+        dispatcher.add_handler(CustomCommandHandler('playersof', players_of, pass_args=True))
+        dispatcher.add_handler(CustomCommandHandler('whohas', who_has, pass_args=True))
+
 
 
         data = json.loads(event["body"])

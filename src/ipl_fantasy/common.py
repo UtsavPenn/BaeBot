@@ -1,7 +1,8 @@
 import re
 import tabulate
+from collections import defaultdict
 
-from ipl_fantasy.data import get_league_details, get_players
+from ipl_fantasy.data import get_league_details, get_players, get_squad_details
 
 
 USER_IDS = \
@@ -67,5 +68,20 @@ def determine_team(short_name):
             return team
         if short_name == team:
             return team
+
+
+def get_ipl_player_to_users_mapping(teams=None):
+    ipl_players = defaultdict(list)
+    for user_id in USER_IDS:
+        for player in get_squad_details(user_id)['players']:
+            player_details = get_player(player)
+            if teams and not player_details['team'] in teams:
+                continue
+            ipl_players[player_details.name].append(
+                get_league_team_name_for_user(user_id))
+
+    return ipl_players
+
+
 
 
