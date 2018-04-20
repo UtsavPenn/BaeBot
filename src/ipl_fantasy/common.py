@@ -1,7 +1,7 @@
 import re
 import tabulate
 
-from ipl_fantasy.data import get_league_details
+from ipl_fantasy.data import get_league_details, get_players
 
 
 USER_IDS = \
@@ -28,6 +28,11 @@ def simple_table(data):
 
 
 
+def get_player(player_id):
+    players = get_players()
+    return players.get(int(player_id))
+    
+
 def determine_user(user):
     user_regexes = [
         (re.compile('gopi', re.IGNORECASE), "shubhamdas947@gmail.com"),
@@ -36,7 +41,9 @@ def determine_user(user):
         (re.compile('(pro)?a?dity', re.IGNORECASE), "adityanarayan.1191@gmail.com"),
         (re.compile('suj', re.IGNORECASE), "sujith90@gmail.com"),
         (re.compile('a?ayu', re.IGNORECASE), "aayush.krishankumar@gmail.com"),
-        (re.compile('bad', re.IGNORECASE), "badrinathrayadurg@gmail.com")
+        (re.compile('bad', re.IGNORECASE), "badrinathrayadurg@gmail.com"),
+        (re.compile('sra', re.IGNORECASE), "sravyakotaru@gmail.com"),
+        (re.compile('bhai|nir', re.IGNORECASE), "nanaya5588@gmail.com"),
     ]
     
     for regex, user_id in user_regexes:

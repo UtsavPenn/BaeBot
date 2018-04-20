@@ -1,7 +1,10 @@
 import os
+import json
 import functools
 
 import requests
+import bunch
+import boto3
 
 
 def get_headers_from_chrome(text):
@@ -40,7 +43,7 @@ def get_player_details(user_id):
 
 @functools.lru_cache()
 def get_squad_details(user_id):
-    URL = "https://2fjfpxrbb3.execute-api.ap-southeast-1.amazonaws.com/production/useriplapi/getsquad?matchId=7909&userid={}".format(user_id)
+    URL = "https://2fjfpxrbb3.execute-api.ap-southeast-1.amazonaws.com/production/useriplapi/getsquad?matchId=7910&userid={}".format(user_id)
     return get_request_data(URL, headers=API_HEADERS)
 
 
@@ -51,7 +54,21 @@ def get_league_details(league_id='ip3NjxML'):
 
 
 def get_live_score_for_user(user_id):
-    URL = "https://2fjfpxrbb3.execute-api.ap-southeast-1.amazonaws.com/production/useriplapi/getlivescore?matchId=7909&userid={}&matchLink=http://datacdn.iplt20.com/dynamic/data/core/cricket/2012/ipl2018/ipl2018-16/scoring.js".format(user_id)
+    URL = "https://2fjfpxrbb3.execute-api.ap-southeast-1.amazonaws.com/production/useriplapi/getlivescore?matchId=7910&userid={}&matchLink=http://datacdn.iplt20.com/dynamic/data/core/cricket/2012/ipl2018/ipl2018-16/scoring.js".format(user_id)
     data = get_request_data(URL, headers=API_HEADERS)
     return data['battingPoints'] + data['fieldingPoints'] + data['bowlingPoints']
+
+
+class Player(bunch.Bunch):
+    
+    @property
+    def name(self):
+        return " ".join(map(lambda x: x.capitalize(), self['name'].split('-')))
+
+@functools.lru_cache()
+def get_players():
+    s3_client = boto3.client('s3')
+    resp = s3_client.get_object(Bucket='com.baebot.storage', Key='players.json')
+    players = json.loads(resp['Body'].read())
+    return {int(id): Player(player) for id, player in players.items()}
 

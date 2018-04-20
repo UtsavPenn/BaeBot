@@ -12,14 +12,33 @@ from telegram.chat import Chat
 from telegram.update import Update
 
 from wrappers import CustomCommandHandler
-from ipl_fantasy.handlers import power_players, subs_left
+from ipl_fantasy.handlers import (power_players, 
+                                subs_left, 
+                                stealths_left,
+                                second_power_players,
+                                picked_players)
+
 
 log = logging.getLogger(__name__)
 
 START_TEXT = """Ask me:
+
 /start
 /powerplayers - Example usage: /powerplayers or /powerplayers sujith
+/secondpowerplayers - same as above
 /subsleft - Example Usage: /subsleft or /subsleft badri
+/stealthleft - Example Usage: /stealthleft or /stealthleft aayush
+/pickedplayers - Example Usage: /pickedplayers <teamname1> <teamname2>
+                            Where team name is any of:
+
+                                kings-xi-punjab
+                                rajasthan-royals
+                                delhi-daredevils
+                                chennai-super-kings
+                                kolkata-knight-riders
+                                sunrisers-hyderabad
+                                mumbai-indians
+                                royal-challengers-bangalore
 """
 
 class Dispatcher(object):
@@ -50,7 +69,13 @@ def main(event, context):
         dispatcher = Dispatcher(bot)
         dispatcher.add_handler(CustomCommandHandler('start', start_message))
         dispatcher.add_handler(CustomCommandHandler('powerplayers', power_players, pass_args=True))
+        dispatcher.add_handler(CustomCommandHandler('secondpowerplayers', second_power_players, pass_args=True))
+
         dispatcher.add_handler(CustomCommandHandler('subsleft', subs_left, pass_args=True))
+        dispatcher.add_handler(CustomCommandHandler('stealthleft', stealths_left, pass_args=True))
+
+        dispatcher.add_handler(CustomCommandHandler('pickedplayers', picked_players, pass_args=True))
+
 
         data = json.loads(event["body"])
         update = Update.de_json(data, bot)
