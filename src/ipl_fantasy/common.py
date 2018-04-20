@@ -50,7 +50,7 @@ def determine_user(user):
         (re.compile('gopi', re.IGNORECASE), "shubhamdas947@gmail.com"),
         (re.compile('tha', re.IGNORECASE), "tarunreddy.bethi@gmail.com"),
         (re.compile('uts', re.IGNORECASE), "utsavkiit@gmail.com"),
-        (re.compile('(pro)?a?dity|chut', re.IGNORECASE), "adityanarayan.1191@gmail.com"),
+        (re.compile('(pro)?a?di|chut', re.IGNORECASE), "adityanarayan.1191@gmail.com"),
         (re.compile('suj', re.IGNORECASE), "sujith90@gmail.com"),
         (re.compile('a?ayu', re.IGNORECASE), "aayush.krishankumar@gmail.com"),
         (re.compile('bad', re.IGNORECASE), "badrinathrayadurg@gmail.com"),

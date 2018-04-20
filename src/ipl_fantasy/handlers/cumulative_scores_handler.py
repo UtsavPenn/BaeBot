@@ -21,6 +21,7 @@ def get_live_total_scores(args=None):
             _user: score - user_score
             for _user, score in live_total_scores.items()
         }
+    live_total_scores = {get_league_team_name_for_user(user): score for user, score in live_total_scores.items()}
     return sorted(
         live_total_scores.items(), key=lambda x: int(x[1]), reverse=True)
 
