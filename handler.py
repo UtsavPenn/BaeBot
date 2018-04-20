@@ -33,14 +33,14 @@ START_TEXT = """Ask me:
 /pickedplayers - Example Usage: /pickedplayers <teamname1> <teamname2>
                             Where team name is any of:
 
-                                kings-xi-punjab
-                                rajasthan-royals
-                                delhi-daredevils
-                                chennai-super-kings
-                                kolkata-knight-riders
-                                sunrisers-hyderabad
-                                mumbai-indians
-                                royal-challengers-bangalore
+                                kings-xi-punjab or kxp
+                                rajasthan-royals or rr
+                                delhi-daredevils or dd
+                                chennai-super-kings or csk
+                                kolkata-knight-riders or kkr
+                                sunrisers-hyderabad or sh
+                                mumbai-indians or mi
+                                royal-challengers-bangalore or rcb
 """
 
 class Dispatcher(object):

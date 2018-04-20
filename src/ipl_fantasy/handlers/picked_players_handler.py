@@ -1,7 +1,11 @@
 from collections import defaultdict
 
 from ipl_fantasy.data import get_squad_details
-from ipl_fantasy.common import get_player, get_league_team_name_for_user, simple_table, USER_IDS
+from ipl_fantasy.common import (get_player, 
+                                get_league_team_name_for_user, 
+                                simple_table, 
+                                USER_IDS, 
+                                determine_team)
 
 
 def get_ipl_player_to_users_mapping(teams=None):
@@ -21,6 +25,7 @@ def picked_players(bot, update, args):
     if not args:
         bot.send_message(update.message.chat_id, "Usage: /pickedplayers <team1> <team2> ...")
         return
-        
+
+    args = list(map(determine_team, args))
     bot.send_message(update.message.chat_id, simple_table(
         get_ipl_player_to_users_mapping(args)))

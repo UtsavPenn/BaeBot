@@ -17,6 +17,17 @@ USER_IDS = \
  'sarkarr612@gmail.com']
 
 
+TEAMS = \
+['kings-xi-punjab', 
+'rajasthan-royals', 
+'delhi-daredevils', 
+'chennai-super-kings', 
+'kolkata-knight-riders', 
+'sunrisers-hyderabad', 
+'mumbai-indians', 
+'royal-challengers-bangalore']
+
+
 def get_league_team_name_for_user(user_id):
     for member in get_league_details()['leagueMembers']:
         if member['userId'] == user_id:
@@ -49,3 +60,13 @@ def determine_user(user):
     for regex, user_id in user_regexes:
         if regex.match(user):
             return user_id
+
+
+def determine_team(short_name):
+    for team in TEAMS:
+        if short_name == "".join(map(lambda x: x[0], team.split('-'))):
+            return team
+        if short_name == team:
+            return team
+
+
