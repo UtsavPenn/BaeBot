@@ -10,3 +10,5 @@ from .live_fantasy_scores_handler import live_fantasy_scores
 from .compare_users_handler import compare_users
 from .players_of_handler import players_of
 from .who_has_handler import who_has
+
+from .cumulative_scores_handler import cumulative_scores

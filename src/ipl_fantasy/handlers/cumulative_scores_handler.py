@@ -8,4 +8,4 @@ def get_live_total_scores():
     return sorted(live_total_scores, key=lambda x: int(x[1]), reverse=True)
 
 def cumulative_scores(bot, update):
-    bot.send_message(update.message.chat_id, simple_table(get_live_scores()))
+    bot.send_message(update.message.chat_id, simple_table(get_live_total_scores()))
