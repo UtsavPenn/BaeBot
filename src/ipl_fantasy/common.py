@@ -30,10 +30,21 @@ TEAMS = \
 'royal-challengers-bangalore']
 
 
+USER_TO_LEAGUE_NAME_MAPPING = \
+{'aayush.krishankumar@gmail.com': 'RaisedByWolves',
+ 'adityanarayan.1191@gmail.com': 'Alpine Warriors',
+ 'badrinathrayadurg@gmail.com': 'Warriors',
+ 'nanaya5588@gmail.com': 'MumbaiKarz',
+ 'sarkarr612@gmail.com': 'Kolkata Rangers',
+ 'shubhamdas947@gmail.com': 'Rocky United',
+ 'sravyakotaru@gmail.com': 'BaskinRobins',
+ 'sujith90@gmail.com': 'SujiWuji XI',
+ 'tarunreddy.bethi@gmail.com': 'TRDY',
+ 'utsavkiit@gmail.com': 'Blaugrana'}
+
+
 def get_league_team_name_for_user(user_id):
-    for member in get_league_details()['leagueMembers']:
-        if member['userId'] == user_id:
-            return member['teamName']
+    return USER_TO_LEAGUE_NAME_MAPPING.get(user_id)
 
 
 def simple_table(data):
