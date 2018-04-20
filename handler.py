@@ -26,6 +26,7 @@ START_TEXT = """Ask me:
 
 /start
 /livefantasyscores
+/cumulativescores
 /powerplayers - Example usage: /powerplayers or /powerplayers sujith
 /secondpowerplayers - same as above
 /subsleft - Example Usage: /subsleft or /subsleft badri
@@ -71,6 +72,7 @@ def main(event, context):
         dispatcher = Dispatcher(bot)
         dispatcher.add_handler(CustomCommandHandler('start', start_message))
         dispatcher.add_handler(CustomCommandHandler('livefantasyscores', live_fantasy_scores))
+        dispatcher.add_handler(CustomCommandHandler('cumulativescores', cumulative_scores))
 
         dispatcher.add_handler(CustomCommandHandler('powerplayers', power_players, pass_args=True))
         dispatcher.add_handler(CustomCommandHandler('secondpowerplayers', second_power_players, pass_args=True))
@@ -79,6 +81,7 @@ def main(event, context):
         dispatcher.add_handler(CustomCommandHandler('stealthleft', stealths_left, pass_args=True))
 
         dispatcher.add_handler(CustomCommandHandler('pickedplayers', picked_players, pass_args=True))
+
 
 
         data = json.loads(event["body"])
