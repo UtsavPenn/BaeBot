@@ -67,8 +67,7 @@ class Player(bunch.Bunch):
 
 @functools.lru_cache()
 def get_players():
-    s3_client = boto3.client('s3')
-    resp = s3_client.get_object(Bucket='com.baebot.storage', Key='players.json')
-    players = json.loads(resp['Body'].read())
+    with open(os.path.join(os.environ['LAMBDA_TASK_ROOT'], 'src', 'ipl_fantasy', 'players.json')) as fp:
+        players = json.loads(fp.read())
     return {int(id): Player(player) for id, player in players.items()}
 
