@@ -74,9 +74,12 @@ def determine_user(user):
             return user_id
 
 
+def team_short_name(team):
+    return "".join(map(lambda x: x[0], team.split('-')))
+
 def determine_team(short_name):
     for team in TEAMS:
-        if short_name == "".join(map(lambda x: x[0], team.split('-'))):
+        if short_name == team_short_name(team):
             return team
         if short_name == team:
             return team
@@ -96,6 +99,13 @@ def get_ipl_player_to_users_mapping(teams=None):
                 get_league_team_name_for_user(user_id))
 
     return ipl_players
+
+
+def get_total_score_so_far_for_user(user_id):
+    for member in get_league_details()['leagueMembers']:
+        if member['userId'] == user_id:
+            return member['totalPoints']
+
 
 
 

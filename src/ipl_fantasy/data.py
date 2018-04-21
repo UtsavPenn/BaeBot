@@ -7,6 +7,7 @@ import bunch
 import boto3
 import cachetools
 
+
 CACHE = cachetools.TTLCache(maxsize=250, ttl=60)
 
 def get_headers_from_chrome(text):
@@ -37,15 +38,18 @@ def get_request_data(url, headers=None):
     r.raise_for_status()
     return r.json()['data']
 
+
 @cachetools.cached(cache=CACHE)
 def get_player_details(user_id):
     URL = "https://2fjfpxrbb3.execute-api.ap-southeast-1.amazonaws.com/production/useriplapi/getuserprofile?userid={}".format(user_id)
     return get_request_data(URL, headers=API_HEADERS)
 
+
 @cachetools.cached(cache=CACHE)
 def get_squad_details(user_id):
     URL = "https://2fjfpxrbb3.execute-api.ap-southeast-1.amazonaws.com/production/useriplapi/getsquad?matchId=7911&userid={}".format(user_id)
     return get_request_data(URL, headers=API_HEADERS)
+
 
 @cachetools.cached(cache=CACHE)
 def get_league_details(league_id='ip3NjxML'):
@@ -67,7 +71,10 @@ class Player(bunch.Bunch):
     
     @property
     def name(self):
-        return " ".join(map(lambda x: x.capitalize(), self['name'].split('-')))
+        from ipl_fantasy.common import team_short_name
+
+        player_name = " ".join(map(lambda x: x.capitalize(), self['name'].split('-')))
+        return player_name + " ({})".format(team_short_name(self['team']))
 
 @functools.lru_cache()
 def get_players():

@@ -22,7 +22,9 @@ from ipl_fantasy.handlers import (power_players,
                                 players_of,
                                 who_has, 
                                 cumulative_scores,
+                                sub_strike_rate,
                                 historical_points)
+                                
 
 
 log = logging.getLogger(__name__)
@@ -40,7 +42,8 @@ START_TEXT = """Ask me:
 /pickedplayers - Example Usage: /pickedplayers <teamname1> <teamname2>
 /compare - Example usage: /compare badri tharun
 /playersof - Example usage: /playersof aditya [or] /playersof aditya csk
-/whohas - Example usage: /whohas watson
+/whohas - Example usage: /whohas stokes
+/subsrr - sub strike rate. Example usage: /subsrr [or] /subsrr tharun
 """
 
 class Dispatcher(object):
@@ -85,6 +88,7 @@ def main(event, context):
         dispatcher.add_handler(CustomCommandHandler('compare', compare_users, pass_args=True))
         dispatcher.add_handler(CustomCommandHandler('playersof', players_of, pass_args=True))
         dispatcher.add_handler(CustomCommandHandler('whohas', who_has, pass_args=True))
+        dispatcher.add_handler(CustomCommandHandler('subsrr', sub_strike_rate, pass_args=True))
 
 
 
