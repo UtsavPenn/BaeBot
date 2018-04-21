@@ -47,7 +47,7 @@ def get_player_details(user_id):
 
 @cachetools.cached(cache=CACHE)
 def get_squad_details(user_id):
-    URL = "https://2fjfpxrbb3.execute-api.ap-southeast-1.amazonaws.com/production/useriplapi/getsquad?matchId=7911&userid={}".format(user_id)
+    URL = "https://2fjfpxrbb3.execute-api.ap-southeast-1.amazonaws.com/production/useriplapi/getsquad?matchId=7912&userid={}".format(user_id)
     return get_request_data(URL, headers=API_HEADERS)
 
 
@@ -58,7 +58,7 @@ def get_league_details(league_id='ip3NjxML'):
 
 
 def get_live_score_for_user(user_id,match_id=7911):
-    URL = "https://2fjfpxrbb3.execute-api.ap-southeast-1.amazonaws.com/production/useriplapi/getlivescore?matchId={}&userid={}&matchLink=http://datacdn.iplt20.com/dynamic/data/core/cricket/2012/ipl2018/ipl2018-18/scoring.js".format(user_id,match_id)
+    URL = "https://2fjfpxrbb3.execute-api.ap-southeast-1.amazonaws.com/production/useriplapi/getlivescore?matchId={}&userid={}&matchLink=http://datacdn.iplt20.com/dynamic/data/core/cricket/2012/ipl2018/ipl2018-18/scoring.js".format(match_id, user_id)
     data = get_request_data(URL, headers=API_HEADERS)
     return data['battingPoints'] + data['fieldingPoints'] + data['bowlingPoints']
 
