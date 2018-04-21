@@ -1,12 +1,7 @@
 from ipl_fantasy.common import (get_league_team_name_for_user, USER_IDS,
-                                simple_table, determine_user)
+                                simple_table, determine_user, get_total_score_so_far_for_user)
 from ipl_fantasy.data import get_live_score_for_user, get_league_details
 
-
-def get_total_score_so_far_for_user(user_id):
-    for member in get_league_details()['leagueMembers']:
-        if member['userId'] == user_id:
-            return member['totalPoints']
 
 
 def get_live_total_scores(args=None):
