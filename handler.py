@@ -21,7 +21,8 @@ from ipl_fantasy.handlers import (power_players,
                                 compare_users, 
                                 players_of,
                                 who_has, 
-                                cumulative_scores)
+                                cumulative_scores,
+                                historical_points)
 
 
 log = logging.getLogger(__name__)
@@ -31,6 +32,7 @@ START_TEXT = """Ask me:
 /start
 /live
 /total - Example usage: /total [or] /total sujith
+/history - Example usage: /history [or] /history proditya
 /pp - Example usage: /pp or /pp sujith
 /spp - same as above
 /subsleft - Example Usage: /subsleft or /subsleft badri
@@ -38,7 +40,7 @@ START_TEXT = """Ask me:
 /pickedplayers - Example Usage: /pickedplayers <teamname1> <teamname2>
 /compare - Example usage: /compare badri tharun
 /playersof - Example usage: /playersof aditya [or] /playersof aditya csk
-/whohas - Example usage: /whohas stokes
+/whohas - Example usage: /whohas watson
 """
 
 class Dispatcher(object):
@@ -71,7 +73,7 @@ def main(event, context):
 
         dispatcher.add_handler(CustomCommandHandler('total', cumulative_scores, pass_args=True))
         dispatcher.add_handler(CustomCommandHandler('live', live_fantasy_scores))
-
+        dispatcher.add_handler(CustomCommandHandler('history', historical_points, pass_args=True))        
 
         dispatcher.add_handler(CustomCommandHandler('pp', power_players, pass_args=True))
         dispatcher.add_handler(CustomCommandHandler('spp', second_power_players, pass_args=True))

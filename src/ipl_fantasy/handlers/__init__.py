@@ -12,3 +12,4 @@ from .players_of_handler import players_of
 from .who_has_handler import who_has
 
 from .cumulative_scores_handler import cumulative_scores
+from .historical_points_handler import historical_points
