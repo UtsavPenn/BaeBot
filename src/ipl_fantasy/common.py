@@ -3,7 +3,7 @@ import tabulate
 from collections import defaultdict
 from fuzzywuzzy import process
 
-from ipl_fantasy.data import get_league_details, get_players, get_squad_details
+from ipl_fantasy.data import get_league_details, get_players, get_squad_details, Player
 
 
 USER_IDS = \
@@ -53,8 +53,10 @@ def simple_table(data):
 
 def get_player(player_id):
     players = get_players()
-    return players.get(int(player_id))
-    
+    match = players.get(int(player_id))
+    if not match:
+        return Player({'id': 'nan', 'name': 'nan', 'team': 'nan'})    
+    return match    
 
 def determine_user(user):
     user_regexes = [
