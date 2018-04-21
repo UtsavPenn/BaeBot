@@ -6,7 +6,7 @@ from ipl_fantasy.data import get_live_score_for_user, get_league_details, get_li
 
 def get_live_total_scores(args=None):
     live_total_scores = {
-        _user: get_total_score_so_far_for_user(_user) + get_live_score_for_user(_user)
+        _user: get_total_score_so_far_for_user(_user)
         for _user in USER_IDS
     }
 

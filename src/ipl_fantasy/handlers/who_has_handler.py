@@ -27,6 +27,6 @@ def who_has(bot, update, args):
         return
 
     player = best_match[0]
-    text = "{} ({}): {}".format(player, best_match[1], ", ".join(
+    text = "{}: {}".format(player, ", ".join(
         mappings.get(player, ['No one'])))
     bot.send_message(update.message.chat_id, text)

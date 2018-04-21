@@ -3,7 +3,11 @@ import tabulate
 from collections import defaultdict
 from fuzzywuzzy import process
 
-from ipl_fantasy.data import get_league_details, get_players, get_squad_details, Player
+from ipl_fantasy.data import (get_league_details, 
+                            get_players, 
+                            get_squad_details, 
+                            Player,
+                            get_player_details)
 
 
 USER_IDS = \
@@ -58,6 +62,7 @@ def get_player(player_id):
         return Player({'id': 'nan', 'name': 'nan', 'team': 'nan'})    
     return match    
 
+
 def determine_user(user):
     user_regexes = [
         (re.compile('gopi', re.IGNORECASE), "shubhamdas947@gmail.com"),
@@ -76,8 +81,10 @@ def determine_user(user):
             return user_id
 
 
+
 def team_short_name(team):
     return "".join(map(lambda x: x[0], team.split('-')))
+
 
 def determine_team(short_name):
     for team in TEAMS:
@@ -91,6 +98,8 @@ def determine_team(short_name):
 
 
 def get_ipl_player_to_users_mapping(teams=None):
+    """Maps an ipl player to users who picked the player"""
+
     ipl_players = defaultdict(list)
     for user_id in USER_IDS:
         for player in get_squad_details(user_id)['players']:
