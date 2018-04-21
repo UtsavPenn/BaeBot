@@ -16,4 +16,8 @@ def players_of(bot, update, args):
 
     player_names = [p.name for p in players]
 
+    if not player_names:
+        bot.send_message(update.message.chat_id, "No players")
+        return
+
     bot.send_message(update.message.chat_id, ",".join(player_names))
