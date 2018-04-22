@@ -7,7 +7,8 @@ from ipl_fantasy.data import (get_league_details,
                             get_players, 
                             get_squad_details, 
                             Player,
-                            get_player_details)
+                            get_player_details,
+                            read_live_match_details)
 
 
 USER_IDS = \
@@ -116,6 +117,9 @@ def get_total_score_so_far_for_user(user_id):
     for member in get_league_details()['leagueMembers']:
         if member['userId'] == user_id:
             return member['totalPoints']
+
+def get_live_match_id():
+    return read_live_match_details['liveMatchId']
 
 
 

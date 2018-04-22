@@ -47,7 +47,8 @@ def get_player_details(user_id):
 
 @cachetools.cached(cache=CACHE)
 def get_squad_details(user_id):
-    URL = "https://2fjfpxrbb3.execute-api.ap-southeast-1.amazonaws.com/production/useriplapi/getsquad?matchId=7913&userid={}".format(user_id)
+    match_id = read_live_match_details()['liveMatchId']
+    URL = "https://2fjfpxrbb3.execute-api.ap-southeast-1.amazonaws.com/production/useriplapi/getsquad?matchId={}&userid={}".format(match_id,xsuser_id)
     return get_request_data(URL, headers=API_HEADERS)
 
 
@@ -57,7 +58,8 @@ def get_league_details(league_id='ip3NjxML'):
     return get_request_data(URL, headers=API_HEADERS)
 
 
-def get_live_score_for_user(user_id,match_id=7913):
+def get_live_score_for_user(user_id):
+    match_id = read_live_match_details()['liveMatchId']
     URL = "https://2fjfpxrbb3.execute-api.ap-southeast-1.amazonaws.com/production/useriplapi/getlivescore?matchId={}&userid={}&matchLink=http://datacdn.iplt20.com/dynamic/data/core/cricket/2012/ipl2018/ipl2018-19/scoring.js".format(match_id, user_id)
     data = get_request_data(URL, headers=API_HEADERS)
     return data['battingPoints'] + data['fieldingPoints'] + data['bowlingPoints']
@@ -65,7 +67,13 @@ def get_live_score_for_user(user_id,match_id=7913):
 def get_points_history_for_user(user_id):
     URL = "https://2fjfpxrbb3.execute-api.ap-southeast-1.amazonaws.com/production/useriplapi/getuserprofile?userid={}".format(user_id)
     return get_request_data(URL, headers=API_HEADERS)
-   
+
+@cachetools.cached(cache=CACHE)
+def read_live_match_details():
+    live_match_details = requests.get('https://s3-ap-southeast-1.amazonaws.com/images-fantasy-iplt20/match-data/livematch.json')
+    return live_match_details.json()
+
+
 
 class Player(bunch.Bunch):
     
