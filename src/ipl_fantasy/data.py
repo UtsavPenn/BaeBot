@@ -48,7 +48,7 @@ def get_player_details(user_id):
 @cachetools.cached(cache=CACHE)
 def get_squad_details(user_id):
     match_id = read_live_match_details()['liveMatchId']
-    match_id = 7913
+    match_id = 7914
     URL = "https://2fjfpxrbb3.execute-api.ap-southeast-1.amazonaws.com/production/useriplapi/getsquad?matchId={}&userid={}".format(match_id,user_id)
     return get_request_data(URL, headers=API_HEADERS)
 
