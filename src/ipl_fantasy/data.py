@@ -39,21 +39,19 @@ def get_request_data(url, headers=None):
     return r.json()['data']
 
 
-@cachetools.cachedmethod(cache=CACHE)
+@functools.lru_cache()
 def get_player_details(user_id):
     URL = "https://2fjfpxrbb3.execute-api.ap-southeast-1.amazonaws.com/production/useriplapi/getuserprofile?userid={}".format(user_id)
     return get_request_data(URL, headers=API_HEADERS)
 
-
-@cachetools.cachedmethod(cache=CACHE)
+@functools.lru_cache()
 def get_squad_details(user_id):
     match_id = read_live_match_details()['liveMatchId']
     match_id = 7914
     URL = "https://2fjfpxrbb3.execute-api.ap-southeast-1.amazonaws.com/production/useriplapi/getsquad?matchId={}&userid={}".format(match_id,user_id)
     return get_request_data(URL, headers=API_HEADERS)
 
-
-@cachetools.cachedmethod(cache=CACHE)
+@functools.lru_cache()
 def get_league_details(league_id='ip3NjxML'):
     URL = "https://2fjfpxrbb3.execute-api.ap-southeast-1.amazonaws.com/production/leagueapi/getleaguemembers?leagueId={}".format(league_id)
     return get_request_data(URL, headers=API_HEADERS)
