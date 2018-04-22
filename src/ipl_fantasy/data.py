@@ -61,7 +61,8 @@ def get_league_details(league_id='ip3NjxML'):
 
 def get_live_score_for_user(user_id):
     match_id = read_live_match_details()['liveMatchId']
-    URL = "https://2fjfpxrbb3.execute-api.ap-southeast-1.amazonaws.com/production/useriplapi/getlivescore?matchId={}&userid={}&matchLink=http://datacdn.iplt20.com/dynamic/data/core/cricket/2012/ipl2018/ipl2018-20/scoring.js".format(match_id, user_id)
+    live_match_url = read_live_match_details()['liveUrl']
+    URL = "https://2fjfpxrbb3.execute-api.ap-southeast-1.amazonaws.com/production/useriplapi/getlivescore?matchId={}&userid={}&matchLink={}".format(match_id, user_id,live_match_url)
     data = get_request_data(URL, headers=API_HEADERS)
     return data['battingPoints'] + data['fieldingPoints'] + data['bowlingPoints']
 
