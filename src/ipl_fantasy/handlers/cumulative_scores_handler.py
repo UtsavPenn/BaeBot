@@ -1,6 +1,6 @@
 from ipl_fantasy.common import (get_league_team_name_for_user, USER_IDS,
                                 simple_table, determine_user, get_total_score_so_far_for_user)
-from ipl_fantasy.data import get_live_score_for_user, get_league_details, get_live_score_for_user
+from ipl_fantasy.data import get_live_data_for_user, get_league_details
 
 
 

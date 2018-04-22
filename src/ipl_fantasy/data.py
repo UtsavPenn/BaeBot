@@ -1,14 +1,12 @@
 import os
 import json
-import functools
 
 import requests
 import bunch
 import boto3
-import cachetools
+from cachetools import func as functools
 
 
-CACHE = cachetools.TTLCache(maxsize=250, ttl=100)
 
 def get_headers_from_chrome(text):
     lines = [line for line in text.splitlines() if not line.startswith(":")]
@@ -32,6 +30,7 @@ user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (
 userid: tarunreddy.bethi@gmail.com""".format(os.environ['IPL_ACCESS_TOKEN']))
 
 
+
 def get_request_data(url, headers=None):
     """This appears to be how the data is wrapped in the responses"""
     r = requests.get(url, headers=headers)
@@ -39,41 +38,50 @@ def get_request_data(url, headers=None):
     return r.json()['data']
 
 
-@functools.lru_cache()
+@functools.ttl_cache(ttl=300)
+def get_live_match_details():
+    live_match_details = requests.get('https://s3-ap-southeast-1.amazonaws.com/images-fantasy-iplt20/match-data/livematch.json')
+    return live_match_details.json()
+
+
+def get_live_match_id():
+    live_match_details = get_live_match_details()
+    return live_match_details.get('liveMatchId')
+
+
+@functools.ttl_cache(ttl=200)
 def get_player_details(user_id):
     URL = "https://2fjfpxrbb3.execute-api.ap-southeast-1.amazonaws.com/production/useriplapi/getuserprofile?userid={}".format(user_id)
     return get_request_data(URL, headers=API_HEADERS)
 
-@functools.lru_cache()
+
+@functools.ttl_cache(ttl=200)
 def get_squad_details(user_id):
-    #match_id = read_live_match_details()['liveMatchId']
-    match_id = 7914
+    match_id = get_live_match_id()
     URL = "https://2fjfpxrbb3.execute-api.ap-southeast-1.amazonaws.com/production/useriplapi/getsquad?matchId={}&userid={}".format(match_id,user_id)
     return get_request_data(URL, headers=API_HEADERS)
 
-@functools.lru_cache()
+
+@functools.ttl_cache(ttl=200)
 def get_league_details(league_id='ip3NjxML'):
     URL = "https://2fjfpxrbb3.execute-api.ap-southeast-1.amazonaws.com/production/leagueapi/getleaguemembers?leagueId={}".format(league_id)
     return get_request_data(URL, headers=API_HEADERS)
 
 
-def get_live_score_for_user(user_id):
-    match_id = 7914
-    #match_id = read_live_match_details()['liveMatchId']
-    #live_match_url = read_live_match_details()['liveUrl']
-    live_match_url = "http://datacdn.iplt20.com/dynamic/data/core/cricket/2012/ipl2018/ipl2018-21/scoring.js"
+def get_live_data_for_user(user_id):
+    live_match_details = get_live_match_details()
+    match_id = get_live_match_id()
+    live_match_url = live_match_details.get('liveUrl')
+
     URL = "https://2fjfpxrbb3.execute-api.ap-southeast-1.amazonaws.com/production/useriplapi/getlivescore?matchId={}&userid={}&matchLink={}".format(match_id, user_id,live_match_url)
     data = get_request_data(URL, headers=API_HEADERS)
-    return data['battingPoints'] + data['fieldingPoints'] + data['bowlingPoints']
+    return data
+
+
 
 def get_points_history_for_user(user_id):
     URL = "https://2fjfpxrbb3.execute-api.ap-southeast-1.amazonaws.com/production/useriplapi/getuserprofile?userid={}".format(user_id)
     return get_request_data(URL, headers=API_HEADERS)
-
-@cachetools.cachedmethod(cache=CACHE)
-def read_live_match_details():
-    live_match_details = requests.get('https://s3-ap-southeast-1.amazonaws.com/images-fantasy-iplt20/match-data/livematch.json')
-    return live_match_details.json()
 
 
 

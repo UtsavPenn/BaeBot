@@ -75,7 +75,7 @@ def main(event, context):
         dispatcher.add_handler(CustomCommandHandler('start', start_message))
 
         dispatcher.add_handler(CustomCommandHandler('total', cumulative_scores, pass_args=True))
-        dispatcher.add_handler(CustomCommandHandler('live', live_fantasy_scores))
+        dispatcher.add_handler(CustomCommandHandler('live', live_fantasy_scores, pass_args=True))
         dispatcher.add_handler(CustomCommandHandler('history', historical_points, pass_args=True))        
 
         dispatcher.add_handler(CustomCommandHandler('pp', power_players, pass_args=True))

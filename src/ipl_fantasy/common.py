@@ -8,7 +8,8 @@ from ipl_fantasy.data import (get_league_details,
                             get_squad_details, 
                             Player,
                             get_player_details,
-                            read_live_match_details)
+                            get_live_data_for_user,
+                            get_live_match_details)
 
 
 USER_IDS = \
@@ -113,13 +114,28 @@ def get_ipl_player_to_users_mapping(teams=None):
     return ipl_players
 
 
-def get_total_score_so_far_for_user(user_id):
+
+def _get_total_points_from_league_details(user_id):
     for member in get_league_details()['leagueMembers']:
         if member['userId'] == user_id:
             return member['totalPoints']
 
-def get_live_match_id():
-    return read_live_match_details['liveMatchId']
+        
+def get_total_points_from_live_data(data):
+    return data['battingPoints'] + data['bowlingPoints'] + data['fieldingPoints']
+
+
+def get_total_score_so_far_for_user(user_id):
+    live_data = get_live_match_details()
+    live_user_data = get_live_data_for_user(user_id)
+    if live_data.get('scoreCalculated', False):
+        return _get_total_points_from_league_details(user_id)
+    else:
+        return _get_total_points_from_league_details(user_id) + get_total_points_from_live_data(live_user_data)
+
+
+
+
 
 
 
