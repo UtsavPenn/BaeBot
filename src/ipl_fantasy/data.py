@@ -39,13 +39,13 @@ def get_request_data(url, headers=None):
     return r.json()['data']
 
 
-@cachetools.cached(cache=CACHE)
+@cachetools.cachedmethod(cache=CACHE)
 def get_player_details(user_id):
     URL = "https://2fjfpxrbb3.execute-api.ap-southeast-1.amazonaws.com/production/useriplapi/getuserprofile?userid={}".format(user_id)
     return get_request_data(URL, headers=API_HEADERS)
 
 
-@cachetools.cached(cache=CACHE)
+@cachetools.cachedmethod(cache=CACHE)
 def get_squad_details(user_id):
     match_id = read_live_match_details()['liveMatchId']
     match_id = 7914
@@ -53,7 +53,7 @@ def get_squad_details(user_id):
     return get_request_data(URL, headers=API_HEADERS)
 
 
-@cachetools.cached(cache=CACHE)
+@cachetools.cachedmethod(cache=CACHE)
 def get_league_details(league_id='ip3NjxML'):
     URL = "https://2fjfpxrbb3.execute-api.ap-southeast-1.amazonaws.com/production/leagueapi/getleaguemembers?leagueId={}".format(league_id)
     return get_request_data(URL, headers=API_HEADERS)
@@ -70,7 +70,7 @@ def get_points_history_for_user(user_id):
     URL = "https://2fjfpxrbb3.execute-api.ap-southeast-1.amazonaws.com/production/useriplapi/getuserprofile?userid={}".format(user_id)
     return get_request_data(URL, headers=API_HEADERS)
 
-@cachetools.cached(cache=CACHE)
+@cachetools.cachedmethod(cache=CACHE)
 def read_live_match_details():
     live_match_details = requests.get('https://s3-ap-southeast-1.amazonaws.com/images-fantasy-iplt20/match-data/livematch.json')
     return live_match_details.json()
