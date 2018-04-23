@@ -17,6 +17,11 @@ service: BaeBot # NOTE: update this with your service name
 # Check out our docs for more details
 # frameworkVersion: "=X.X.X"
 
+custom:
+  pythonRequirements:
+    dockerizePip: true
+    zip: true
+
 provider:
   name: aws
   runtime: python3.6
@@ -110,3 +115,7 @@ resources:
      Properties:
        BucketName: com.baebot.storage
        AccessControl: Private
+
+
+plugins:
+  - serverless-python-requirements

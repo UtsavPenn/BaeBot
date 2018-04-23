@@ -1,7 +1,7 @@
 from ipl_fantasy.common import (get_league_team_name_for_user, USER_IDS,
-                                simple_table, determine_user, get_total_score_so_far_for_user)
+                                simple_table, determine_user,
+                                get_total_score_so_far_for_user)
 from ipl_fantasy.data import get_live_data_for_user, get_league_details
-
 
 
 def get_live_total_scores(args=None):
@@ -18,7 +18,10 @@ def get_live_total_scores(args=None):
             for _user, score in live_total_scores.items()
         }
 
-    live_total_scores = {get_league_team_name_for_user(user): score for user, score in live_total_scores.items()}
+    live_total_scores = {
+        get_league_team_name_for_user(user): score
+        for user, score in live_total_scores.items()
+    }
     return sorted(
         live_total_scores.items(), key=lambda x: int(x[1]), reverse=True)
 

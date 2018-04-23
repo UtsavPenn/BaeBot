@@ -6,3 +6,6 @@ boto3
 fuzzywuzzy
 python-Levenshtein 
 cachetools
+pandas
+matplotlib 
+seaborn

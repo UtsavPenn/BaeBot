@@ -15,4 +15,3 @@ from .cumulative_scores_handler import cumulative_scores
 from .historical_points_handler import historical_points
 
 from .sub_strike_rate_handler import sub_strike_rate
-

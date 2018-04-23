@@ -44,9 +44,12 @@ def get_live_match_details():
     return live_match_details.json()
 
 
-def get_live_match_id():
+def get_match_id():
     live_match_details = get_live_match_details()
-    return live_match_details.get('liveMatchId')
+    if not live_match_details.get('scoreCalculated', False):
+        return live_match_details.get('liveMatchId')
+    else:
+        return int(live_match_details.get('liveMatchId')) + 1
 
 
 @functools.ttl_cache(ttl=200)
@@ -57,7 +60,7 @@ def get_player_details(user_id):
 
 @functools.ttl_cache(ttl=200)
 def get_squad_details(user_id):
-    match_id = get_live_match_id()
+    match_id = get_match_id()
     URL = "https://2fjfpxrbb3.execute-api.ap-southeast-1.amazonaws.com/production/useriplapi/getsquad?matchId={}&userid={}".format(match_id,user_id)
     return get_request_data(URL, headers=API_HEADERS)
 
@@ -70,7 +73,7 @@ def get_league_details(league_id='ip3NjxML'):
 
 def get_live_data_for_user(user_id):
     live_match_details = get_live_match_details()
-    match_id = get_live_match_id()
+    match_id = get_match_id()
     live_match_url = live_match_details.get('liveUrl')
 
     URL = "https://2fjfpxrbb3.execute-api.ap-southeast-1.amazonaws.com/production/useriplapi/getlivescore?matchId={}&userid={}&matchLink={}".format(match_id, user_id,live_match_url)
