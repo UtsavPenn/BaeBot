@@ -1,4 +1,5 @@
 import re
+import functools
 import tabulate
 from collections import defaultdict
 from fuzzywuzzy import process
@@ -132,6 +133,19 @@ def get_total_score_so_far_for_user(user_id):
         return _get_total_points_from_league_details(user_id)
     else:
         return _get_total_points_from_league_details(user_id) + get_total_points_from_live_data(live_user_data)
+
+
+
+@functools.lru_cache()
+def determine_player(query_player):
+    all_players = get_players()
+    player_names = [p.name for p in all_players.values()]
+    best_match = process.extractOne(query_player, player_names)
+
+    #Improve this
+    for player in all_players.values():
+        if player.name == best_match[0]:
+            return player
 
 
 

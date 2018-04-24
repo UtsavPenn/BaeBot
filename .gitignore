@@ -1,5 +1,7 @@
 # Distribution / packaging
 .requirements.zip
+*.ipynb
+.ipynb_checkpoints
 .Python
 env/
 build/
