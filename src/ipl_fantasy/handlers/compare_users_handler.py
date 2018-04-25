@@ -2,11 +2,8 @@ from ipl_fantasy.common import determine_user, get_player
 from ipl_fantasy.data import get_squad_details
 
 
-def get_common_players(user1, user2):
-    user1_players = get_squad_details(user1)['players']
-    user2_players = get_squad_details(user2)['players']
-    common_players = set(user1_players) & set(user2_players)
-    return [get_player(player).name for player in common_players]
+def get_players_of(user):
+    return set([get_player(p).name for p in get_squad_details(user)['players']])
 
 
 def compare_users(bot, update, args):
@@ -30,7 +27,15 @@ def compare_users(bot, update, args):
             text="Unable to determine user {}".format(args[1]))
         return
 
+    resp = ""
+
+    user1_players = get_players_of(user1)
+    user2_players = get_players_of(user2)
+
+    resp += "Common Players: {} \n\n".format(", ".join(user1_players & user2_players))
+    resp += "{} - {}: {} \n\n".format(args[0], args[1], ", ".join(user1_players - user2_players))
+    resp += "{} - {}: {} \n\n".format(args[1], args[0], ", ".join(user2_players - user1_players))
+
     bot.send_message(
         chat_id=update.message.chat_id,
-        text="Common Players: " + ", ".join(get_common_players(user1, user2)))
-
+        text=resp)
