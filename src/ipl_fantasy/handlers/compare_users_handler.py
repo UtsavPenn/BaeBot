@@ -33,3 +33,4 @@ def compare_users(bot, update, args):
     bot.send_message(
         chat_id=update.message.chat_id,
         text="Common Players: " + ", ".join(get_common_players(user1, user2)))
+

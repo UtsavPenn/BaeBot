@@ -9,9 +9,9 @@ def get_stealth_left_for_user(user_id):
 
 
 def get_stealths_left():
-    stealths_left = [(get_league_team_name_for_user(user),
-                      get_stealth_left_for_user(user)) for user in USER_IDS]
-    return sorted(stealths_left, key=lambda x: int(x[1]), reverse=True)
+    stealths = [(get_league_team_name_for_user(user),
+                 get_stealth_left_for_user(user)) for user in USER_IDS]
+    return sorted(stealths, key=lambda x: int(x[1]), reverse=True)
 
 
 def stealths_left(bot, update, args):

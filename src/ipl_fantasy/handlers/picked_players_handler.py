@@ -13,7 +13,6 @@ def picked_players(bot, update, args):
         return
 
     args = list(map(determine_team, args))
-
     ipl_players = get_ipl_player_to_users_mapping(args)
 
     data = sorted(ipl_players.items(), key=lambda x: len(x[1]), reverse=True)
