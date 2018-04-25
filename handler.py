@@ -43,7 +43,7 @@ START_TEXT = """Ask me:
 /subsleft - Example Usage: /subsleft or /subsleft badri
 /stealthleft - Example Usage: /stealthleft or /stealthleft aayush
 /pickedplayers - Example Usage: /pickedplayers <teamname1> <teamname2>
-/compare - Example usage: /compare badri tharun
+/compare - Example usage: /compare badri tharun <teamname1> ...
 /playersof - Example usage: /playersof aditya [or] /playersof aditya csk
 /whohas - Example usage: /whohas stokes
 /subsrr - sub strike rate. Example usage: /subsrr [or] /subsrr tharun

@@ -4,8 +4,9 @@ tabulate
 bunch
 boto3
 fuzzywuzzy
-python-Levenshtein 
+python-Levenshtein
 cachetools
 pandas
-matplotlib 
+matplotlib
 seaborn
+networkx
