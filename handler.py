@@ -9,14 +9,15 @@ import sys
 import logging
 
 here = os.path.dirname(os.path.realpath(__file__))
+sys.path.append(os.path.join(here, "./"))
 sys.path.append(os.path.join(here, "./vendored"))
-sys.path.append(os.path.join(here, "./src"))
 
 from telegram.bot import Bot
 from telegram.update import Update
 
-from wrappers import CustomCommandHandler
-from ipl_fantasy.handlers import (power_players,
+from bae_bot.wrappers import CustomCommandHandler
+from bae_bot.dispatcher import Dispatcher
+from bae_bot.ipl_fantasy.handlers import (power_players,
                                   subs_left,
                                   stealths_left,
                                   second_power_players,
@@ -51,19 +52,6 @@ START_TEXT = """Ask me:
 """
 
 
-class Dispatcher(object):
-
-    def __init__(self, bot):
-        self.bot = bot
-        self.handlers = []
-
-    def add_handler(self, handler):
-        self.handlers.append(handler)
-
-    def process_update(self, update):
-        for handler in self.handlers:
-            if handler.check_update(update):
-                handler.handle_update(update, self.bot)
 
 
 def start_message(bot, update):

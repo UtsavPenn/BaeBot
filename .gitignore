@@ -1,4 +1,7 @@
 # Distribution / packaging
+.cache
+.pytest_cache
+*__pycache__
 .idea
 .requirements.zip
 *.ipynb
