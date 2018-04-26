@@ -41,7 +41,7 @@ def historical_points(bot, update, args):
             user2 = determine_user(args[1])
             points2 = get_user_points_history(user2)
             plot = sns.pointplot(
-                x=[p[0] for p in points2], y=[p[1] for p in points2], color='yellow')
+                x=[p[0] for p in points2], y=[p[1] for p in points2], color='red')
     
         plot.legend(handles=plot.lines[::len(points)+1], labels=args)
         plot.figure.savefig(named_file.name)
