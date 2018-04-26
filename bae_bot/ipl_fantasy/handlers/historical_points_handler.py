@@ -36,6 +36,14 @@ def historical_points(bot, update, args):
         named_file = tempfile.NamedTemporaryFile(suffix='.png')
         plot = sns.pointplot(
             x=[p[0] for p in points], y=[p[1] for p in points])
+
+        if len(args) > 1:
+            user2 = determine_user(args[1])
+            points2 = get_user_points_history(user2)
+            plot = sns.pointplot(
+                x=[p[0] for p in points2], y=[p[1] for p in points2], color='yellow')
+    
+        plot.legend(handles=plot.lines[::len(points)+1], labels=args)
         plot.figure.savefig(named_file.name)
         bot.send_photo(
             update.message.chat_id, photo=open(named_file.name, 'rb'))
