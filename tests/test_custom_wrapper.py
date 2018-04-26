@@ -1,5 +1,3 @@
-from unittest.mock import create_autospec, MagicMock
-from telegram.bot import Update, Bot
 from bae_bot.wrappers.custom_command_handler import CustomCommandHandler
 
 

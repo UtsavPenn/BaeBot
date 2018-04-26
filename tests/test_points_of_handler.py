@@ -1,7 +1,3 @@
-from unittest.mock import create_autospec, MagicMock
-
-from telegram.bot import Bot
-
 from bae_bot.ipl_fantasy.handlers.points_of_handler import points_of
 
 

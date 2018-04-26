@@ -1,6 +1,3 @@
-from unittest.mock import MagicMock
-
-
 from bae_bot.ipl_fantasy.handlers.live_fantasy_scores_handler import live_fantasy_scores
 
 
