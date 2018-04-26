@@ -1,31 +1,11 @@
-import os
 import json
+import os
 
-import requests
 import bunch
+import requests
 from cachetools import func as functools
 
-
-def get_headers_from_chrome(text):
-    lines = [line for line in text.splitlines() if not line.startswith(":")]
-
-    _k = lambda line: line.split()[0][:-1]
-    _v = lambda line: " ".join(line.split()[1:])
-    return {_k(line): _v(line) for line in lines}
-
-
-API_HEADERS = get_headers_from_chrome(
-    """:authority: 2fjfpxrbb3.execute-api.ap-southeast-1.amazonaws.com
-:method: GET
-:scheme: https
-accept: application/json,
-accept-encoding: gzip, deflate, br
-accept-language: en-US,en;q=0.9
-accesstoken: {}
-origin: https://fantasy.iplt20.com
-referer: https://fantasy.iplt20.com/tournament
-user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-userid: tarunreddy.bethi@gmail.com""".format(os.environ['IPL_ACCESS_TOKEN']))
+from bae_bot.ipl_fantasy.headers import API_HEADERS
 
 
 def get_request_data(url, headers=None):
@@ -35,7 +15,7 @@ def get_request_data(url, headers=None):
     return r.json()['data']
 
 
-@functools.ttl_cache(ttl=300)
+@functools.ttl_cache(ttl=3600)
 def get_live_match_details():
     live_match_details = requests.get(
         'https://s3-ap-southeast-1.amazonaws.com/images-fantasy-iplt20/match-data/livematch.json')
@@ -45,13 +25,13 @@ def get_live_match_details():
 def get_match_id():
     live_match_details = get_live_match_details()
     if not live_match_details.get('scoreCalculated', False):
-        return live_match_details.get('liveMatchId')
+        return int(live_match_details.get('liveMatchId'))
     else:
         return int(live_match_details.get('liveMatchId')) + 1
 
 
 @functools.ttl_cache(ttl=200)
-def get_player_details(user_id):
+def get_user_details(user_id):
     URL = "https://2fjfpxrbb3.execute-api.ap-southeast-1.amazonaws.com/production/useriplapi/getuserprofile?userid={}".format(
         user_id)
     return get_request_data(URL, headers=API_HEADERS)

@@ -1,14 +1,14 @@
-import re
 import functools
-import tabulate
+import re
 from collections import defaultdict
+
+import tabulate
 from fuzzywuzzy import process
 
 from bae_bot.ipl_fantasy.data import (get_league_details,
                                       get_players,
                                       get_squad_details,
                                       Player,
-                                      get_player_details,
                                       get_live_data_for_user,
                                       get_live_match_details)
 
