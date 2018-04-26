@@ -15,7 +15,10 @@ def live_fantasy_scores(bot, update, args):
         player_points = []
         for player in live_data['playerPoints']:
             if player['playerId'] in user_players:
-                player_points.append((get_player(player['playerId']).name, get_points_from_live_player_points(player)))
+                points = get_points_from_live_player_points(player)
+                if not points:
+                    continue
+                player_points.append((get_player(player['playerId']).name, points))
 
         player_points = sorted(player_points, key=lambda x: int(x[1]), reverse=True)
 
