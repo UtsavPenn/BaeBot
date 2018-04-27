@@ -4,9 +4,9 @@ except ImportError:
     pass
 
 import json
+import logging
 import os
 import sys
-import logging
 
 here = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(os.path.join(here, "./"))
@@ -48,7 +48,7 @@ START_TEXT = """Ask me:
 /playersof - Example usage: /playersof aditya [or] /playersof aditya csk
 /whohas - Example usage: /whohas stokes
 /subsrr - sub strike rate. Example usage: /subsrr [or] /subsrr tharun
-/pointsof - Get live points of player. Example usage: /pointsof rashid
+/pointsof - Example usage: /pointsof [or] /pointsof rashid
 """
 
 
