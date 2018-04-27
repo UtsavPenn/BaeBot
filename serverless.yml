@@ -21,12 +21,18 @@ custom:
   pythonRequirements:
     dockerizePip: true
     zip: true
+  defaultStage: dev
+  defaultRegion: us-east-1
+  profiles:
+    dev: dev
+    prod: prod
+    test: dev
 
 provider:
   name: aws
   runtime: python3.6
-  stage: dev
-  region: us-east-1
+  stage: ${opt:stage, self:custom.defaultStage}
+  region: ${opt:region, self:custom.defaultRegion}
 
 
 # you can overwrite defaults here
@@ -78,7 +84,7 @@ functions:
 #    Check the event documentation for details
     events:
       - http:
-          path: my-custom-url
+          path: baebot
           method: post
           cors: true
 #      - s3: ${env:BUCKET}
@@ -108,13 +114,13 @@ functions:
 #      variable2: value2
 
 # you can add CloudFormation resource templates here
-resources:
- Resources:
-   S3StorageBucket:
-     Type: AWS::S3::Bucket
-     Properties:
-       BucketName: com.baebot.storage
-       AccessControl: Private
+#resources:
+# Resources:
+#   S3StorageBucket:
+#     Type: AWS::S3::Bucket
+#     Properties:
+#       BucketName: com.baebot.storage.${opt:stage}
+#       AccessControl: Private
 
 
 plugins:
