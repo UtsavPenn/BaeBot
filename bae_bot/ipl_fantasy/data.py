@@ -84,3 +84,10 @@ def get_players():
     with open(os.path.join(os.environ['LAMBDA_TASK_ROOT'], 'bae_bot', 'ipl_fantasy', 'players.json')) as fp:
         players = json.loads(fp.read())
     return {int(id): Player(player) for id, player in players.items()}
+
+
+@functools.lru_cache()
+def get_matches():
+    with open(os.path.join(os.environ['LAMBDA_TASK_ROOT'], 'bae_bot', 'ipl_fantasy', 'matches.json')) as fp:
+        matches = json.loads(fp.read())
+    return list(map(Player, matches))

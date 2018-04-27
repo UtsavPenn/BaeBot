@@ -1,0 +1,394 @@
+[
+  {
+    "starttime": "2018-04-07T20:00:00+0530",
+    "teams": [
+      "mumbai-indians",
+      "chennai-super-kings"
+    ]
+  },
+  {
+    "starttime": "2018-04-08T16:00:00+0530",
+    "teams": [
+      "kings-xi-punjab",
+      "delhi-daredevils"
+    ]
+  },
+  {
+    "starttime": "2018-04-08T20:00:00+0530",
+    "teams": [
+      "kolkata-knight-riders",
+      "royal-challengers-bangalore"
+    ]
+  },
+  {
+    "starttime": "2018-04-09T20:00:00+0530",
+    "teams": [
+      "sunrisers-hyderabad",
+      "rajasthan-royals"
+    ]
+  },
+  {
+    "starttime": "2018-04-10T20:00:00+0530",
+    "teams": [
+      "chennai-super-kings",
+      "kolkata-knight-riders"
+    ]
+  },
+  {
+    "starttime": "2018-04-11T20:00:00+0530",
+    "teams": [
+      "rajasthan-royals",
+      "delhi-daredevils"
+    ]
+  },
+  {
+    "starttime": "2018-04-12T20:00:00+0530",
+    "teams": [
+      "sunrisers-hyderabad",
+      "mumbai-indians"
+    ]
+  },
+  {
+    "starttime": "2018-04-13T20:00:00+0530",
+    "teams": [
+      "royal-challengers-bangalore",
+      "kings-xi-punjab"
+    ]
+  },
+  {
+    "starttime": "2018-04-14T16:00:00+0530",
+    "teams": [
+      "mumbai-indians",
+      "delhi-daredevils"
+    ]
+  },
+  {
+    "starttime": "2018-04-14T20:00:00+0530",
+    "teams": [
+      "kolkata-knight-riders",
+      "sunrisers-hyderabad"
+    ]
+  },
+  {
+    "starttime": "2018-04-15T16:00:00+0530",
+    "teams": [
+      "royal-challengers-bangalore",
+      "rajasthan-royals"
+    ]
+  },
+  {
+    "starttime": "2018-04-15T20:00:00+0530",
+    "teams": [
+      "kings-xi-punjab",
+      "chennai-super-kings"
+    ]
+  },
+  {
+    "starttime": "2018-04-16T20:00:00+0530",
+    "teams": [
+      "kolkata-knight-riders",
+      "delhi-daredevils"
+    ]
+  },
+  {
+    "starttime": "2018-04-17T20:00:00+0530",
+    "teams": [
+      "mumbai-indians",
+      "royal-challengers-bangalore"
+    ]
+  },
+  {
+    "starttime": "2018-04-18T20:00:00+0530",
+    "teams": [
+      "rajasthan-royals",
+      "kolkata-knight-riders"
+    ]
+  },
+  {
+    "starttime": "2018-04-19T20:00:00+0530",
+    "teams": [
+      "kings-xi-punjab",
+      "sunrisers-hyderabad"
+    ]
+  },
+  {
+    "starttime": "2018-04-20T20:00:00+0530",
+    "teams": [
+      "chennai-super-kings",
+      "rajasthan-royals"
+    ]
+  },
+  {
+    "starttime": "2018-04-21T16:00:00+0530",
+    "teams": [
+      "kolkata-knight-riders",
+      "kings-xi-punjab"
+    ]
+  },
+  {
+    "starttime": "2018-04-21T20:00:00+0530",
+    "teams": [
+      "royal-challengers-bangalore",
+      "delhi-daredevils"
+    ]
+  },
+  {
+    "starttime": "2018-04-22T16:00:00+0530",
+    "teams": [
+      "sunrisers-hyderabad",
+      "chennai-super-kings"
+    ]
+  },
+  {
+    "starttime": "2018-04-22T20:00:00+0530",
+    "teams": [
+      "rajasthan-royals",
+      "mumbai-indians"
+    ]
+  },
+  {
+    "starttime": "2018-04-23T20:00:00+0530",
+    "teams": [
+      "delhi-daredevils",
+      "kings-xi-punjab"
+    ]
+  },
+  {
+    "starttime": "2018-04-24T20:00:00+0530",
+    "teams": [
+      "mumbai-indians",
+      "sunrisers-hyderabad"
+    ]
+  },
+  {
+    "starttime": "2018-04-25T20:00:00+0530",
+    "teams": [
+      "royal-challengers-bangalore",
+      "chennai-super-kings"
+    ]
+  },
+  {
+    "starttime": "2018-04-26T20:00:00+0530",
+    "teams": [
+      "sunrisers-hyderabad",
+      "kings-xi-punjab"
+    ]
+  },
+  {
+    "starttime": "2018-04-27T20:00:00+0530",
+    "teams": [
+      "delhi-daredevils",
+      "kolkata-knight-riders"
+    ]
+  },
+  {
+    "starttime": "2018-04-28T20:00:00+0530",
+    "teams": [
+      "chennai-super-kings",
+      "mumbai-indians"
+    ]
+  },
+  {
+    "starttime": "2018-04-29T16:00:00+0530",
+    "teams": [
+      "rajasthan-royals",
+      "sunrisers-hyderabad"
+    ]
+  },
+  {
+    "starttime": "2018-04-29T20:00:00+0530",
+    "teams": [
+      "royal-challengers-bangalore",
+      "kolkata-knight-riders"
+    ]
+  },
+  {
+    "starttime": "2018-04-30T20:00:00+0530",
+    "teams": [
+      "chennai-super-kings",
+      "delhi-daredevils"
+    ]
+  },
+  {
+    "starttime": "2018-05-01T20:00:00+0530",
+    "teams": [
+      "royal-challengers-bangalore",
+      "mumbai-indians"
+    ]
+  },
+  {
+    "starttime": "2018-05-02T20:00:00+0530",
+    "teams": [
+      "delhi-daredevils",
+      "rajasthan-royals"
+    ]
+  },
+  {
+    "starttime": "2018-05-03T20:00:00+0530",
+    "teams": [
+      "kolkata-knight-riders",
+      "chennai-super-kings"
+    ]
+  },
+  {
+    "starttime": "2018-05-04T20:00:00+0530",
+    "teams": [
+      "kings-xi-punjab",
+      "mumbai-indians"
+    ]
+  },
+  {
+    "starttime": "2018-05-05T16:00:00+0530",
+    "teams": [
+      "chennai-super-kings",
+      "royal-challengers-bangalore"
+    ]
+  },
+  {
+    "starttime": "2018-05-05T20:00:00+0530",
+    "teams": [
+      "sunrisers-hyderabad",
+      "delhi-daredevils"
+    ]
+  },
+  {
+    "starttime": "2018-05-06T16:00:00+0530",
+    "teams": [
+      "mumbai-indians",
+      "kolkata-knight-riders"
+    ]
+  },
+  {
+    "starttime": "2018-05-06T20:00:00+0530",
+    "teams": [
+      "kings-xi-punjab",
+      "rajasthan-royals"
+    ]
+  },
+  {
+    "starttime": "2018-05-07T20:00:00+0530",
+    "teams": [
+      "sunrisers-hyderabad",
+      "royal-challengers-bangalore"
+    ]
+  },
+  {
+    "starttime": "2018-05-08T20:00:00+0530",
+    "teams": [
+      "rajasthan-royals",
+      "kings-xi-punjab"
+    ]
+  },
+  {
+    "starttime": "2018-05-09T20:00:00+0530",
+    "teams": [
+      "kolkata-knight-riders",
+      "mumbai-indians"
+    ]
+  },
+  {
+    "starttime": "2018-05-10T20:00:00+0530",
+    "teams": [
+      "delhi-daredevils",
+      "sunrisers-hyderabad"
+    ]
+  },
+  {
+    "starttime": "2018-05-11T20:00:00+0530",
+    "teams": [
+      "rajasthan-royals",
+      "chennai-super-kings"
+    ]
+  },
+  {
+    "starttime": "2018-05-12T16:00:00+0530",
+    "teams": [
+      "kings-xi-punjab",
+      "kolkata-knight-riders"
+    ]
+  },
+  {
+    "starttime": "2018-05-12T20:00:00+0530",
+    "teams": [
+      "delhi-daredevils",
+      "royal-challengers-bangalore"
+    ]
+  },
+  {
+    "starttime": "2018-05-13T16:00:00+0530",
+    "teams": [
+      "chennai-super-kings",
+      "sunrisers-hyderabad"
+    ]
+  },
+  {
+    "starttime": "2018-05-13T20:00:00+0530",
+    "teams": [
+      "mumbai-indians",
+      "rajasthan-royals"
+    ]
+  },
+  {
+    "starttime": "2018-05-14T20:00:00+0530",
+    "teams": [
+      "kings-xi-punjab",
+      "royal-challengers-bangalore"
+    ]
+  },
+  {
+    "starttime": "2018-05-15T20:00:00+0530",
+    "teams": [
+      "kolkata-knight-riders",
+      "rajasthan-royals"
+    ]
+  },
+  {
+    "starttime": "2018-05-16T20:00:00+0530",
+    "teams": [
+      "mumbai-indians",
+      "kings-xi-punjab"
+    ]
+  },
+  {
+    "starttime": "2018-05-17T20:00:00+0530",
+    "teams": [
+      "royal-challengers-bangalore",
+      "sunrisers-hyderabad"
+    ]
+  },
+  {
+    "starttime": "2018-05-18T20:00:00+0530",
+    "teams": [
+      "delhi-daredevils",
+      "chennai-super-kings"
+    ]
+  },
+  {
+    "starttime": "2018-05-19T16:00:00+0530",
+    "teams": [
+      "rajasthan-royals",
+      "royal-challengers-bangalore"
+    ]
+  },
+  {
+    "starttime": "2018-05-19T20:00:00+0530",
+    "teams": [
+      "sunrisers-hyderabad",
+      "kolkata-knight-riders"
+    ]
+  },
+  {
+    "starttime": "2018-05-20T16:00:00+0530",
+    "teams": [
+      "delhi-daredevils",
+      "mumbai-indians"
+    ]
+  },
+  {
+    "starttime": "2018-05-20T20:00:00+0530",
+    "teams": [
+      "chennai-super-kings",
+      "kings-xi-punjab"
+    ]
+  }
+]
