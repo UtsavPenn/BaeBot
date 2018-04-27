@@ -32,7 +32,7 @@ provider:
   name: aws
   runtime: python3.6
   stage: ${opt:stage, self:custom.defaultStage}
-  region: ${opt:region, self:custom.defaultRegion}
+  region: ${file(.${opt:stage}.secrets.json):REGION}
 
 
 # you can overwrite defaults here
@@ -61,8 +61,8 @@ provider:
 
 # you can define service wide environment variables here
   environment:
-    TELEGRAM_TOKEN: ${env:TELEGRAM_TOKEN}
-    IPL_ACCESS_TOKEN: ${env:IPL_ACCESS_TOKEN}
+    TELEGRAM_TOKEN: ${file(.${self:provider.stage}.secrets.json):TELEGRAM_TOKEN}
+    IPL_ACCESS_TOKEN: ${file(.${self:provider.stage}.secrets.json):IPL_ACCESS_TOKEN}
     #variable1: value1
 
 # you can add packaging information here
@@ -76,7 +76,7 @@ provider:
 
 functions:
   main:
-    handler: handler.main
+    handler: bae_bot.handler.main
     timeout: 45
 
 #    The following are a few example events you can configure

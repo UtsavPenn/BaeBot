@@ -52,7 +52,7 @@ START_TEXT = """Ask me:
 """
 
 
-
+bot = Bot(token=os.environ['TELEGRAM_TOKEN'])
 
 def start_message(bot, update):
     bot.send_message(update.message.chat_id, START_TEXT)
@@ -60,7 +60,6 @@ def start_message(bot, update):
 
 def main(event, context):
     try:
-        bot = Bot(token=os.environ['TELEGRAM_TOKEN'])
 
         dispatcher = Dispatcher(bot)
         dispatcher.add_handler(CustomCommandHandler('start', start_message))

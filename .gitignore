@@ -1,4 +1,6 @@
 # Distribution / packaging
+.dev.secrets.json
+.prod.secrets.json
 .cache
 .pytest_cache
 *__pycache__
