@@ -9,5 +9,5 @@ cachetools
 pandas
 matplotlib
 seaborn
-networkx
 arrow
+pytz
