@@ -26,6 +26,6 @@ def players_of(bot, update, args):
         for match in get_matches():
             starttime = arrow.get(match.starttime)
             if((player.team in match.teams) and (now < starttime)):
-                message += player.name + " " + str((starttime-now).days) + "\n"
+                message += player.name + " " + str((starttime.date()-now.date()).days) + "\n"
                 break
     bot.send_message(update.message.chat_id, message)
