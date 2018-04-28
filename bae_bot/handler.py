@@ -29,7 +29,8 @@ from bae_bot.ipl_fantasy.handlers import (power_players,
                                   cumulative_scores,
                                   sub_strike_rate,
                                   historical_points,
-                                  points_of)
+                                  points_of,
+                                  stats_of)
 
 log = logging.getLogger(__name__)
 
@@ -49,6 +50,7 @@ START_TEXT = """Ask me:
 /whohas - Example usage: /whohas stokes
 /subsrr - sub strike rate. Example usage: /subsrr [or] /subsrr tharun
 /pointsof - Example usage: /pointsof [or] /pointsof rashid
+/statsof Example usage: /statsof shreyas
 """
 
 
@@ -77,6 +79,7 @@ def main(event, context):
         dispatcher.add_handler(CustomCommandHandler('whohas', who_has, pass_args=True))
         dispatcher.add_handler(CustomCommandHandler('subsrr', sub_strike_rate, pass_args=True))
         dispatcher.add_handler(CustomCommandHandler('pointsof', points_of, pass_args=True))
+        dispatcher.add_handler(CustomCommandHandler('statsof', stats_of, pass_args=True))
 
         data = json.loads(event["body"])
         update = Update.de_json(data, bot)

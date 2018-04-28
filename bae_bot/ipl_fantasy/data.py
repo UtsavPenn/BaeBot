@@ -68,6 +68,19 @@ def get_points_history_for_user(user_id):
         user_id)
     return get_request_data(URL, headers=API_HEADERS)
 
+def get_match_wise_live_data_for_user(user_id,match_id,match_no):
+    live_match_details = get_live_match_details()
+
+    if(int(match_no) < 10):
+        match_no = '0' + match_no
+
+    live_match_url = 'http://datacdn.iplt20.com/dynamic/data/core/cricket/2012/ipl2018/ipl2018-'+match_no+'/scoring.js'
+
+    URL = "https://2fjfpxrbb3.execute-api.ap-southeast-1.amazonaws.com/production/useriplapi/getlivescore?matchId={}&userid={}&matchLink={}".format(
+        match_id, user_id, live_match_url)
+    data = get_request_data(URL, headers=API_HEADERS)
+    return data
+
 
 class Player(bunch.Bunch):
 
@@ -82,6 +95,7 @@ class Player(bunch.Bunch):
 @functools.lru_cache()
 def get_players():
     with open(os.path.join(os.environ['LAMBDA_TASK_ROOT'], 'bae_bot', 'ipl_fantasy', 'players.json')) as fp:
+    #with open('./bae_bot/ipl_fantasy/players.json') as fp:
         players = json.loads(fp.read())
     return {int(id): Player(player) for id, player in players.items()}
 
