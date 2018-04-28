@@ -19,5 +19,13 @@ def players_of(bot, update, args):
     if not player_names:
         bot.send_message(update.message.chat_id, "No players")
         return
-
-    bot.send_message(update.message.chat_id, ",".join(player_names))
+    
+    message = "Player (team) (next match in)\n"
+    now = arrow.now()
+    for player in players:
+        for match in get_matches():
+            starttime = arrow.get(match.starttime)
+            if((player.team in match.teams) and (now < starttime)):
+                message += player.name + " " + str((starttime-now).days) + "\n"
+                break
+    bot.send_message(update.message.chat_id, message)
