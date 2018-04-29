@@ -19,7 +19,7 @@ def subs_left(bot, update, args):
         bot.send_message(update.message.chat_id, get_subs_left_for_user(user))
     else:
         matches_left = 7949 - int(get_match_id()) + 1
-        projected_subs = int(75 / 56 * matches_left)
+        projected_subs = int(75 / 55 * matches_left)
 
         resp = "Matches left: {} \n".format(matches_left)
         resp += "Projected Subs: {}\n".format(projected_subs)
