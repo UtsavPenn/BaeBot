@@ -70,8 +70,6 @@ def get_points_history_for_user(user_id):
 
 @functools.ttl_cache(ttl=200)
 def get_match_wise_live_data_for_user(user_id,match_id,match_no):
-    live_match_details = get_live_match_details()
-
     if(int(match_no) < 10):
         match_no = '0' + match_no
 
@@ -96,7 +94,6 @@ class Player(bunch.Bunch):
 @functools.lru_cache()
 def get_players():
     with open(os.path.join(os.environ['LAMBDA_TASK_ROOT'], 'bae_bot', 'ipl_fantasy', 'players.json')) as fp:
-    #with open('./bae_bot/ipl_fantasy/players.json') as fp:
         players = json.loads(fp.read())
     return {int(id): Player(player) for id, player in players.items()}
 
