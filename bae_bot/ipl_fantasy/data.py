@@ -15,7 +15,7 @@ def get_request_data(url, headers=None):
     return r.json()['data']
 
 
-@functools.ttl_cache(ttl=3600)
+@functools.ttl_cache(ttl=100)
 def get_live_match_details():
     live_match_details = requests.get(
         'https://s3-ap-southeast-1.amazonaws.com/images-fantasy-iplt20/match-data/livematch.json')

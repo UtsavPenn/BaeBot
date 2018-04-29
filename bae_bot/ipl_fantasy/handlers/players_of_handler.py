@@ -23,18 +23,23 @@ def players_of(bot, update, args):
     if not player_names:
         bot.send_message(update.message.chat_id, "No players")
         return
-    
+
     players_table = []
 
     pacific_tz = pytz.timezone('US/Pacific')
     now = arrow.now().astimezone(pacific_tz)
+    matches = get_matches()
     for player in players:
-        for match in get_matches():
+        next_opportunity = 0
+        for match in matches:
             starttime = arrow.get(match.starttime).astimezone(pacific_tz)
-            if player.team in match.teams and now <= starttime:
-                players_table.append((player.name, str((starttime.date() - now.date()).days)))
+            if now > starttime:
+                continue
+            next_opportunity += 1
+            if player.team in match.teams:
+                players_table.append((player.name, next_opportunity))
                 break
 
-    message = tabulate.tabulate(players_table, headers=['Player', 'nextmatchin'])
+    message = tabulate.tabulate(players_table, headers=['Player', 'nextopportunityin'])
 
     bot.send_message(update.message.chat_id, message)
