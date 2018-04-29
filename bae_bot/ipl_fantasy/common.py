@@ -39,8 +39,8 @@ USER_TO_LEAGUE_NAME_MAPPING = \
      'adityanarayan.1191@gmail.com': 'Alpine Warriors',
      'badrinathrayadurg@gmail.com': 'Warriors',
      'nanaya5588@gmail.com': 'MumbaiKarz',
-     'sarkarr612@gmail.com': 'Kolkata Rangers',
      'shubhamdas947@gmail.com': 'Rocky United',
+     'sarkarr612@gmail.com': 'Kolkata Rangers',
      'sravyakotaru@gmail.com': 'BaskinRobins',
      'sujith90@gmail.com': 'SujiWuji XI',
      'tarunreddy.bethi@gmail.com': 'TRDY',
@@ -74,6 +74,7 @@ def determine_user(user):
         (re.compile('bad', re.IGNORECASE), "badrinathrayadurg@gmail.com"),
         (re.compile('sra', re.IGNORECASE), "sravyakotaru@gmail.com"),
         (re.compile('bhai|nir', re.IGNORECASE), "nanaya5588@gmail.com"),
+        (re.compile('rang', re.IGNORECASE), "sarkarr612@gmail.com")
     ]
 
     for regex, user_id in user_regexes:
