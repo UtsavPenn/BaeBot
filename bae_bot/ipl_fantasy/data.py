@@ -68,6 +68,7 @@ def get_points_history_for_user(user_id):
         user_id)
     return get_request_data(URL, headers=API_HEADERS)
 
+@functools.ttl_cache(ttl=200)
 def get_match_wise_live_data_for_user(user_id,match_id,match_no):
     live_match_details = get_live_match_details()
 

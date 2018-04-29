@@ -49,6 +49,7 @@ def stats_of(bot, update, args):
             x=[p[0] for p in points], y=[p[1] for p in points])
 
     plot.figure.savefig(named_file.name)
+    bot.send_message(update.message.chat_id, "Player - {}".format(player.name))
     bot.send_photo(
             update.message.chat_id, photo=open(named_file.name, 'rb'))
 
