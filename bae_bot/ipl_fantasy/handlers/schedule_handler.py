@@ -20,7 +20,8 @@ def schedule(bot, update, args):
     pacific_tz = pytz.timezone('US/Pacific')
     now = arrow.now().astimezone(pacific_tz)
 
-    resp = "Next matches: \n"
+    resp = "Today: {} \n".format(str(now.date())[5:])
+    resp += "Next matches: \n"
     next_matches = [match for match in all_matches if arrow.get(match.starttime).astimezone(pacific_tz) > now]
 
     if args:
