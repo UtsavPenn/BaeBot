@@ -18,3 +18,5 @@ from .sub_strike_rate_handler import sub_strike_rate
 from .points_of_handler import points_of
 from .stats_of_handler import stats_of
 
+from .next_opportunities_handler import next_opportunities
+
