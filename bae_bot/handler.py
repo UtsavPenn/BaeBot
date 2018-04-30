@@ -18,20 +18,21 @@ from telegram.update import Update
 from bae_bot.wrappers import CustomCommandHandler
 from bae_bot.dispatcher import Dispatcher
 from bae_bot.ipl_fantasy.handlers import (power_players,
-                                  subs_left,
-                                  stealths_left,
-                                  second_power_players,
-                                  picked_players,
-                                  live_fantasy_scores,
-                                  compare_users,
-                                  players_of,
-                                  who_has,
-                                  cumulative_scores,
-                                  sub_strike_rate,
-                                  historical_points,
-                                  points_of,
-                                  stats_of,
-                                  next_opportunities)
+                                          subs_left,
+                                          stealths_left,
+                                          second_power_players,
+                                          picked_players,
+                                          live_fantasy_scores,
+                                          compare_users,
+                                          players_of,
+                                          who_has,
+                                          cumulative_scores,
+                                          sub_strike_rate,
+                                          historical_points,
+                                          points_of,
+                                          stats_of,
+                                          next_opportunities,
+                                          schedule)
 
 log = logging.getLogger(__name__)
 
@@ -51,8 +52,9 @@ START_TEXT = """Ask me:
 /whohas - Example usage: /whohas stokes
 /subsrr - sub strike rate. Example usage: /subsrr [or] /subsrr tharun
 /pointsof - Example usage: /pointsof [or] /pointsof rashid
-/statsof Example usage: /statsof shreyas
-/nextof Example usage: /nextof bravo
+/statsof - Example usage: /statsof shreyas
+/nextof - Example usage: /nextof bravo
+/schedule [or] /sched - Example usage: /schedule [or] /schedule 5 [or] /schedule dd
 """
 
 
@@ -83,6 +85,8 @@ def main(event, context):
         dispatcher.add_handler(CustomCommandHandler('pointsof', points_of, pass_args=True))
         dispatcher.add_handler(CustomCommandHandler('statsof', stats_of, pass_args=True))
         dispatcher.add_handler(CustomCommandHandler('nextof', next_opportunities, pass_args=True))
+        dispatcher.add_handler(CustomCommandHandler('schedule', schedule, pass_args=True))
+        dispatcher.add_handler(CustomCommandHandler('sched', schedule, pass_args=True))
 
         data = json.loads(event["body"])
         update = Update.de_json(data, bot)
