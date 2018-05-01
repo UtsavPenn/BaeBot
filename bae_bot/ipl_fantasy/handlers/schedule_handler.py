@@ -3,7 +3,7 @@ import pytz
 
 from bae_bot.ipl_fantasy.common import determine_team, team_short_name
 from bae_bot.ipl_fantasy.data import get_matches
-from ipl_fantasy.common import simple_table
+from bae_bot.ipl_fantasy.common import simple_table
 
 
 def _is_int(arg):

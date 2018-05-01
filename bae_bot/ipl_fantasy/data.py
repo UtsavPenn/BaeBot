@@ -14,6 +14,11 @@ def get_request_data(url, headers=None):
     r.raise_for_status()
     return r.json()['data']
 
+def post_data(url, headers=None):
+    """This appears to be how the data is wrapped in the responses"""
+    r = requests.post(url, headers=headers)
+    r.raise_for_status()
+    return r.json()['data']
 
 @functools.ttl_cache(ttl=100)
 def get_live_match_details():
@@ -78,6 +83,12 @@ def get_match_wise_live_data_for_user(user_id,match_id,match_no):
     URL = "https://2fjfpxrbb3.execute-api.ap-southeast-1.amazonaws.com/production/useriplapi/getlivescore?matchId={}&userid={}&matchLink={}".format(
         match_id, user_id, live_match_url)
     data = get_request_data(URL, headers=API_HEADERS)
+    return data
+
+@functools.ttl_cache(ttl=200)
+def get_top_players():
+    URL = "https://2fjfpxrbb3.execute-api.ap-southeast-1.amazonaws.com/production/leaderboardsapi/gettopplayers"
+    data = post_data(URL,headers=API_HEADERS)
     return data
 
 
