@@ -20,8 +20,7 @@ def schedule(bot, update, args):
     pacific_tz = pytz.timezone('US/Pacific')
     now = arrow.now().astimezone(pacific_tz)
 
-    resp = "Today: {} \n".format(str(now.date())[5:])
-    resp += "Next matches: \n"
+    resp = "Next matches: \n"
     next_matches = [match for match in all_matches if arrow.get(match.starttime).astimezone(pacific_tz) > now]
 
     if args:
@@ -40,5 +39,6 @@ def schedule(bot, update, args):
         row.extend(list(map(team_short_name, match.teams)))
         matches_table.append(row)
 
+    resp += "Today: {} \n".format(str(now.date())[5:])
     resp += simple_table(matches_table)
     bot.send_message(update.message.chat_id, resp)
