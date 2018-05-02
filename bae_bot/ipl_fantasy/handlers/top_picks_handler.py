@@ -27,10 +27,7 @@ def get_top_picks(short_team_name=None):
         team_name = determine_team(short_team_name)
         all_players = [x for x in all_players if x[5] == team_name]
     top_players =  sorted(all_players, key=lambda x: int(x[4]), reverse=True)[:5]
-    top_players =  [x[1] for x in top_players]
     return top_players
-
-
 
 def top_picks(bot, update, args): 
     rankings = []
@@ -39,7 +36,9 @@ def top_picks(bot, update, args):
         rankings = get_top_picks(team)
     else:
         rankings = get_top_picks()
+    rankings_table = []
 
-    #message = simple_table(rankings)
-    print(rankings)
-    bot.send_message(update.message.chat_id,rankings)
+    for rank in rankings:
+        row = [rank[1],rank[4]]
+        rankings_table.append(row)
+    bot.send_message(update.message.chat_id,simple_table(rankings_table))

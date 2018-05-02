@@ -56,7 +56,7 @@ START_TEXT = """Ask me:
 /statsof - Example usage: /statsof shreyas
 /nextof - Example usage: /nextof bravo
 /schedule [or] /sched - Example usage: /schedule [or] /schedule 5 [or] /schedule dd
-/toppicks - Example usage: /toppicks [or] /toppicks csk
+/bestpicks - Example usage: /bestpicks [or] /bestpicks csk
 """
 
 
@@ -89,7 +89,7 @@ def main(event, context):
         dispatcher.add_handler(CustomCommandHandler('nextof', next_opportunities, pass_args=True))
         dispatcher.add_handler(CustomCommandHandler('schedule', schedule, pass_args=True))
         dispatcher.add_handler(CustomCommandHandler('sched', schedule, pass_args=True))
-        dispatcher.add_handler(CustomCommandHandler('toppicks', top_picks, pass_args=True))
+        dispatcher.add_handler(CustomCommandHandler('bestpicks', top_picks, pass_args=True))
 
 
         data = json.loads(event["body"])
