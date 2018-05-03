@@ -27,9 +27,15 @@ def get_live_match_details():
     return live_match_details.json()
 
 
+def _is_score_calculated(live_match_details):
+    if int(live_match_details.get('liveMatchId')) == 7925: #Hardcoding due to IPL bug
+        return True
+    return live_match_details.get('scoreCalculated', False)
+
+
 def get_match_id():
     live_match_details = get_live_match_details()
-    if not live_match_details.get('scoreCalculated', False):
+    if not _is_score_calculated(live_match_details):
         return int(live_match_details.get('liveMatchId'))
     else:
         return int(live_match_details.get('liveMatchId')) + 1

@@ -124,6 +124,10 @@ def get_total_points_from_live_data(data):
 def get_total_score_so_far_for_user(user_id):
     live_data = get_live_match_details()
     live_user_data = get_live_data_for_user(user_id)
+
+    if int(live_data.get('liveMatchId')) == 7925: #Hardcoding for the bug
+        return _get_total_points_from_league_details(user_id)
+
     if live_data.get('scoreCalculated', False):
         return _get_total_points_from_league_details(user_id)
     else:

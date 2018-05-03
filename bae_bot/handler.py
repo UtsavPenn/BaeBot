@@ -33,7 +33,8 @@ from bae_bot.ipl_fantasy.handlers import (power_players,
                                           stats_of,
                                           next_opportunities,
                                           schedule,
-                                          top_picks)
+                                          top_picks,
+                                          mult_left)
 
 log = logging.getLogger(__name__)
 
@@ -57,10 +58,11 @@ START_TEXT = """Ask me:
 /nextof - Example usage: /nextof bravo
 /schedule [or] /sched - Example usage: /schedule [or] /schedule 5 [or] /schedule dd
 /bestpicks - Example usage: /bestpicks [or] /bestpicks csk
+/multleft - Example usage: /multleft [or] /multleft badri
 """
 
-
 bot = Bot(token=os.environ['TELEGRAM_TOKEN'])
+
 
 def start_message(bot, update):
     bot.send_message(update.message.chat_id, START_TEXT)
@@ -90,7 +92,7 @@ def main(event, context):
         dispatcher.add_handler(CustomCommandHandler('schedule', schedule, pass_args=True))
         dispatcher.add_handler(CustomCommandHandler('sched', schedule, pass_args=True))
         dispatcher.add_handler(CustomCommandHandler('bestpicks', top_picks, pass_args=True))
-
+        dispatcher.add_handler(CustomCommandHandler('multleft', mult_left, pass_args=True))
 
         data = json.loads(event["body"])
         update = Update.de_json(data, bot)
