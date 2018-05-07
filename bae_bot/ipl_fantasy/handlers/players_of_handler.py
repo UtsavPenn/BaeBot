@@ -15,8 +15,8 @@ def players_of(bot, update, args):
     players = [get_player(p) for p in get_squad_details(user)['players']]
 
     if len(args) > 1:
-        team = determine_team(args[1])
-        players = [p for p in players if p['team'] == team]
+        teams = list(map(determine_team, args[1:]))
+        players = [p for p in players if p['team'] in teams]
 
     player_names = [p.name for p in players]
 
@@ -41,5 +41,7 @@ def players_of(bot, update, args):
                 break
 
     message = tabulate.tabulate(players_table, headers=['Player', 'nextopportunityin'])
+    resp = "Total Players: {} \n".format(len(players_table))
+    resp += message
 
-    bot.send_message(update.message.chat_id, message)
+    bot.send_message(update.message.chat_id, resp)

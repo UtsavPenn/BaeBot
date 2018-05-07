@@ -1,5 +1,6 @@
 import json
 import os
+import logging
 
 import bunch
 import requests
@@ -7,12 +8,18 @@ from cachetools import func as functools
 
 from bae_bot.ipl_fantasy.headers import API_HEADERS
 
+LOG = logging.getLogger(__name__)
 
 def get_request_data(url, headers=None):
     """This appears to be how the data is wrapped in the responses"""
-    r = requests.get(url, headers=headers)
-    r.raise_for_status()
-    return r.json()['data']
+
+    try:
+        r = requests.get(url, headers=headers)
+        r.raise_for_status()
+        return r.json()['data']
+    except Exception as e:
+        LOG.exception("Failed to get request data for {}".format(url))
+        raise e
 
 def post_data(url, headers=None):
     """This appears to be how the data is wrapped in the responses"""
@@ -49,8 +56,9 @@ def get_user_details(user_id):
 
 
 @functools.ttl_cache(ttl=200)
-def get_squad_details(user_id):
-    match_id = get_match_id()
+def get_squad_details(user_id, match_id=None):
+    if not match_id:
+        match_id = get_match_id()
     URL = "https://2fjfpxrbb3.execute-api.ap-southeast-1.amazonaws.com/production/useriplapi/getsquad?matchId={}&userid={}".format(
         match_id, user_id)
     return get_request_data(URL, headers=API_HEADERS)
@@ -108,6 +116,15 @@ class Player(bunch.Bunch):
         return player_name + " ({})".format(team_short_name(self['team']))
 
 
+class Match(bunch.Bunch):
+
+    @property
+    def description(self):
+        from bae_bot.ipl_fantasy.common import team_short_name
+
+        return " vs ".join(map(team_short_name, self['teams']))
+
+
 @functools.lru_cache()
 def get_players():
     with open(os.path.join(os.environ['LAMBDA_TASK_ROOT'], 'bae_bot', 'ipl_fantasy', 'players.json')) as fp:
@@ -119,4 +136,20 @@ def get_players():
 def get_matches():
     with open(os.path.join(os.environ['LAMBDA_TASK_ROOT'], 'bae_bot', 'ipl_fantasy', 'matches.json')) as fp:
         matches = json.loads(fp.read())
-    return list(map(Player, matches))
+    return list(map(Match, matches))
+
+
+def get_match(match_id):
+    match_id = int(match_id)
+    all_matches = get_matches()
+    for i, match in enumerate(all_matches):
+        if i + 7894 == int(match_id):
+            return match
+
+
+def get_scoring_info(match_id=None):
+    if not match_id:
+        match_id = get_match_id()
+    URL = "https://cricketapi.platform.iplt20.com//fixtures/{}/scoring".format(match_id)
+    r = requests.get(URL)
+    return r.json()

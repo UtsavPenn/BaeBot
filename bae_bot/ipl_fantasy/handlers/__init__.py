@@ -16,3 +16,5 @@ from .subs_left_handler import subs_left
 from .who_has_handler import who_has
 from .top_picks_handler import top_picks
 from .mult_left_handler import mult_left
+from .toss_handler import toss
+from .mom_handler import mom

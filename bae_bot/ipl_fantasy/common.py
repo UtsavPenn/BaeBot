@@ -11,6 +11,7 @@ from bae_bot.ipl_fantasy.data import (get_league_details,
                                       Player,
                                       get_live_data_for_user,
                                       get_live_match_details)
+from bae_bot.ipl_fantasy.data import get_matches
 
 USER_IDS = \
     ['sujith90@gmail.com',
@@ -148,3 +149,5 @@ def determine_player(query_player):
 
 def get_points_from_live_player_points(player_points):
     return sum((v for k, v in player_points.items() if not k.startswith('second') and k.endswith('Points')))
+
+
