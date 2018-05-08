@@ -62,6 +62,7 @@ START_TEXT = """Ask me:
 /bestpicks - Example usage: /bestpicks [or] /bestpicks csk
 /multleft - Example usage: /multleft [or] /multleft badri
 /toss 
+/mom
 """
 
 bot = Bot(token=os.environ['TELEGRAM_TOKEN'])

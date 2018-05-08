@@ -4,6 +4,7 @@ from bae_bot.ipl_fantasy.common import (get_league_team_name_for_user, USER_IDS,
                                         get_points_from_live_player_points)
 
 from bae_bot.ipl_fantasy.data import get_live_data_for_user, get_squad_details
+from bae_bot.ipl_fantasy.data import get_scoring_info
 
 
 def live_fantasy_scores(bot, update, args):

@@ -102,13 +102,20 @@ def get_ipl_player_to_users_mapping(teams=None):
 
     ipl_players = defaultdict(list)
     for user_id in USER_IDS:
-        for player in get_squad_details(user_id)['players']:
+        squad_details = get_squad_details(user_id)
+        for player in squad_details['players']:
             player_details = get_player(player)
             if teams and not player_details['team'] in teams:
                 continue
-            ipl_players[player_details.name].append(
-                get_league_team_name_for_user(user_id))
-
+            if int(player) == int(squad_details['powerPlayer']):
+                ipl_players[player_details.name].append(
+                    get_league_team_name_for_user(user_id) + "(PP)")
+            elif int(player) == int(squad_details['secondPowerPlayer']):
+                ipl_players[player_details.name].append(
+                    get_league_team_name_for_user(user_id) + "(SPP)")
+            else:
+                ipl_players[player_details.name].append(
+                    get_league_team_name_for_user(user_id))
     return ipl_players
 
 
