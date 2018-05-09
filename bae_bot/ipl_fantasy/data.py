@@ -35,8 +35,9 @@ def get_live_match_details():
 
 
 def _is_score_calculated(live_match_details):
-    if int(live_match_details.get('liveMatchId')) == 7925: #Hardcoding due to IPL bug
+    if int(live_match_details.get('liveMatchId')) in (7925, 7933): #Hardcoding due to IPL bug
         return True
+
     return live_match_details.get('scoreCalculated', False)
 
 
@@ -113,7 +114,12 @@ class Player(bunch.Bunch):
         from bae_bot.ipl_fantasy.common import team_short_name
 
         player_name = " ".join(map(lambda x: x.capitalize(), self['name'].split('-')))
-        return player_name + " ({})".format(team_short_name(self['team']))
+        player_name += " ({})".format(team_short_name(self['team']))
+        if self['uncapped']:
+            player_name += "(uc)"
+        if self['overseas']:
+            player_name += "(o)"
+        return player_name
 
 
 class Match(bunch.Bunch):

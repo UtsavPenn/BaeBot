@@ -1,6 +1,7 @@
 import jmespath
 
 from bae_bot.ipl_fantasy.data import get_scoring_info
+from bae_bot.ipl_fantasy.common import get_player
 
 
 def toss(bot, update):
@@ -15,9 +16,12 @@ def toss(bot, update):
     teams = jmespath.search('matchInfo.teams', scoring_info)
     if teams:
         for team in teams:
-            resp += "Team: {} \n".format(team['team']['abbreviation'])
-            resp += ",".join([player['fullName'] for player in team['players']])
-            resp += "\n"
+            if team['players']:
+                resp += "Team: {} \n".format(team['team']['abbreviation'])
+                resp += ",".join([get_player(player['id']).name for player in team['players']])
+                resp += "\n"
+            else:
+                resp += "No squad info found for this team yet. Check back shortly."
     else:
         resp += "No squad info found yet. Check back shortly."
 
