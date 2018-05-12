@@ -21,7 +21,7 @@ def toss(bot, update):
                 resp += ",".join([get_player(player['id']).name for player in team['players']])
                 resp += "\n"
             else:
-                resp += "No squad info found for this team yet. Check back shortly."
+                resp += "No squad info found for this team yet. Check back shortly. \n"
     else:
         resp += "No squad info found yet. Check back shortly."
 

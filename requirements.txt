@@ -1,7 +1,7 @@
 requests
 python-telegram-bot
 tabulate
-bunch
+munch
 boto3
 fuzzywuzzy
 python-Levenshtein

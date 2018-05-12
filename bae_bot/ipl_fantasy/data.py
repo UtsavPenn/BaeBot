@@ -2,7 +2,7 @@ import json
 import os
 import logging
 
-import bunch
+import munch
 import requests
 from cachetools import func as functools
 
@@ -107,7 +107,7 @@ def get_top_players():
     return data
 
 
-class Player(bunch.Bunch):
+class Player(munch.Munch):
 
     @property
     def name(self):
@@ -122,7 +122,7 @@ class Player(bunch.Bunch):
         return player_name
 
 
-class Match(bunch.Bunch):
+class Match(munch.Munch):
 
     @property
     def description(self):

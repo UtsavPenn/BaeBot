@@ -12,13 +12,21 @@ def players_of(bot, update, args):
         return
 
     user = determine_user(args[0])
-    players = [get_player(p) for p in get_squad_details(user)['players']]
+    squad_details = get_squad_details(user)
+    players = [get_player(p) for p in squad_details['players']]
 
     if len(args) > 1:
         teams = list(map(determine_team, args[1:]))
         players = [p for p in players if p['team'] in teams]
 
-    player_names = [p.name for p in players]
+    player_names = []
+    for player in players:
+        if int(player.id) == squad_details['powerPlayer']:
+            player_names.append(player.name+"(PP)")
+        elif int(player.id) == squad_details['secondPowerPlayer']:
+            player_names.append(player.name+"(SPP)")
+        else:
+            player_names.append(player.name)
 
     if not player_names:
         bot.send_message(update.message.chat_id, "No players")

@@ -11,11 +11,13 @@ def get_all_players_rank_data():
     player_info = []
     for player_standing in player_standings:
         player_id = player_standing['playerId']
+        player_details = get_player(player_id)
         player_name = player_standing['fullName']
         batting_rank = player_standing['battingRank']
         bowling_rank = player_standing['bowlingRank']
-        team_name = get_player(player_id)['team']
-        player_type = get_player(player_id).type
+        team_name = player_details['team']
+        print(player_details.toDict())
+        player_type = player_details['type']
         player_points = sum((v for k,v in player_standing.items() if k.endswith('P')))
         player_info.append((player_id,player_name,player_type, batting_rank,bowling_rank,player_points,team_name))
     #write_updated_top_picks_to_file(json.dumps(player_info))
