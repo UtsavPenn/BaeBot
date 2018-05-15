@@ -16,7 +16,6 @@ def get_all_players_rank_data():
         batting_rank = player_standing['battingRank']
         bowling_rank = player_standing['bowlingRank']
         team_name = player_details['team']
-        print(player_details.toDict())
         player_type = player_details['type']
         player_points = sum((v for k,v in player_standing.items() if k.endswith('P')))
         player_info.append((player_id,player_name,player_type, batting_rank,bowling_rank,player_points,team_name))

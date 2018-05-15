@@ -10,4 +10,4 @@ def test_top_picks_handler_with_args(bot, update):
 
 def test_top_picks_handler_without_args(bot, update):
     top_picks(bot, update, [])
-    assert "Watson" in get_sent_message(bot)
+    assert "Narine" in get_sent_message(bot)

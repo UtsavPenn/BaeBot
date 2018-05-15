@@ -36,7 +36,8 @@ from bae_bot.ipl_fantasy.handlers import (power_players,
                                           top_picks,
                                           mult_left,
                                           toss,
-                                          mom)
+                                          mom,
+                                          coinflip)
 
 log = logging.getLogger(__name__)
 
@@ -63,6 +64,7 @@ START_TEXT = """Ask me:
 /multleft - Example usage: /multleft [or] /multleft badri
 /toss 
 /mom
+/coinflip
 """
 
 bot = Bot(token=os.environ['TELEGRAM_TOKEN'])
@@ -98,7 +100,7 @@ def main(event, context):
         dispatcher.add_handler(CustomCommandHandler('bestpicks', top_picks, pass_args=True))
         dispatcher.add_handler(CustomCommandHandler('multleft', mult_left, pass_args=True))
         dispatcher.add_handler(CustomCommandHandler('toss', toss))
-        dispatcher.add_handler(CustomCommandHandler('mom', mom))
+        dispatcher.add_handler(CustomCommandHandler('coinflip', coinflip, pass_args=True))
 
         data = json.loads(event["body"])
         update = Update.de_json(data, bot)

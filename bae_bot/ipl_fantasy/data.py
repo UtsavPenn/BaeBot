@@ -35,7 +35,7 @@ def get_live_match_details():
 
 
 def _is_score_calculated(live_match_details):
-    if int(live_match_details.get('liveMatchId')) in (7925, 7933): #Hardcoding due to IPL bug
+    if int(live_match_details.get('liveMatchId')) in (7942, ): #Hardcoding due to IPL bug
         return True
 
     return live_match_details.get('scoreCalculated', False)
@@ -49,14 +49,14 @@ def get_match_id():
         return int(live_match_details.get('liveMatchId')) + 1
 
 
-@functools.ttl_cache(ttl=200)
+@functools.ttl_cache(ttl=120)
 def get_user_details(user_id):
     URL = "https://2fjfpxrbb3.execute-api.ap-southeast-1.amazonaws.com/production/useriplapi/getuserprofile?userid={}".format(
         user_id)
     return get_request_data(URL, headers=API_HEADERS)
 
 
-@functools.ttl_cache(ttl=200)
+@functools.ttl_cache(ttl=120)
 def get_squad_details(user_id, match_id=None):
     if not match_id:
         match_id = get_match_id()
@@ -65,7 +65,7 @@ def get_squad_details(user_id, match_id=None):
     return get_request_data(URL, headers=API_HEADERS)
 
 
-@functools.ttl_cache(ttl=200)
+@functools.ttl_cache(ttl=120)
 def get_league_details(league_id='ip3NjxML'):
     URL = "https://2fjfpxrbb3.execute-api.ap-southeast-1.amazonaws.com/production/leagueapi/getleaguemembers?leagueId={}".format(
         league_id)
@@ -88,7 +88,7 @@ def get_points_history_for_user(user_id):
         user_id)
     return get_request_data(URL, headers=API_HEADERS)
 
-@functools.ttl_cache(ttl=200)
+@functools.ttl_cache(ttl=120)
 def get_match_wise_live_data_for_user(user_id,match_id,match_no):
     if(int(match_no) < 10):
         match_no = '0' + match_no
@@ -100,7 +100,7 @@ def get_match_wise_live_data_for_user(user_id,match_id,match_no):
     data = get_request_data(URL, headers=API_HEADERS)
     return data
 
-@functools.ttl_cache(ttl=200)
+@functools.ttl_cache(ttl=120)
 def get_top_players():
     URL = "https://2fjfpxrbb3.execute-api.ap-southeast-1.amazonaws.com/production/leaderboardsapi/gettopplayers"
     data = post_data(URL,headers=API_HEADERS)

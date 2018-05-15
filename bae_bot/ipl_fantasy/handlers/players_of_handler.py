@@ -5,6 +5,14 @@ import tabulate
 from bae_bot.ipl_fantasy.common import determine_user, get_player, determine_team
 from bae_bot.ipl_fantasy.data import get_squad_details, get_matches
 
+def _get_player_name(player, squad_details):
+    if int(player.id) == squad_details['powerPlayer']:
+        return player.name + "(PP)"
+
+    if int(player.id) == squad_details['secondPowerPlayer']:
+        return player.name + "(SPP)"
+
+    return player.name
 
 def players_of(bot, update, args):
     if not args:
@@ -19,16 +27,7 @@ def players_of(bot, update, args):
         teams = list(map(determine_team, args[1:]))
         players = [p for p in players if p['team'] in teams]
 
-    player_names = []
-    for player in players:
-        if int(player.id) == squad_details['powerPlayer']:
-            player_names.append(player.name+"(PP)")
-        elif int(player.id) == squad_details['secondPowerPlayer']:
-            player_names.append(player.name+"(SPP)")
-        else:
-            player_names.append(player.name)
-
-    if not player_names:
+    if not players:
         bot.send_message(update.message.chat_id, "No players")
         return
 
@@ -45,8 +44,9 @@ def players_of(bot, update, args):
                 continue
             next_opportunity += 1
             if player.team in match.teams:
-                players_table.append((player.name, next_opportunity))
+                players_table.append((_get_player_name(player, squad_details), next_opportunity))
                 break
+
 
     message = tabulate.tabulate(players_table, headers=['Player', 'nextopportunityin'])
     resp = "Total Players: {} \n".format(len(players_table))

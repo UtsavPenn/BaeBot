@@ -60,18 +60,18 @@ def get_player(player_id):
     players = get_players()
     match = players.get(int(player_id))
     if not match:
-        return Player({'id': 'nan', 'name': 'nan', 'team': 'nan'})
-    return match
+        return Player({"name": "nan", "team": "nan", "type": "nan", "id": "nan"})
+    return players.get(int(player_id))
 
 
 def determine_user(user):
     user_regexes = [
-        (re.compile('gopi', re.IGNORECASE), "shubhamdas947@gmail.com"),
+        (re.compile('gop', re.IGNORECASE), "shubhamdas947@gmail.com"),
         (re.compile('tha', re.IGNORECASE), "tarunreddy.bethi@gmail.com"),
         (re.compile('uts|stud', re.IGNORECASE), "utsavkiit@gmail.com"),
         (re.compile('(pro)?a?di|chut', re.IGNORECASE), "adityanarayan.1191@gmail.com"),
         (re.compile('suj', re.IGNORECASE), "sujith90@gmail.com"),
-        (re.compile('a?ayu', re.IGNORECASE), "aayush.krishankumar@gmail.com"),
+        (re.compile('a?ay', re.IGNORECASE), "aayush.krishankumar@gmail.com"),
         (re.compile('bad', re.IGNORECASE), "badrinathrayadurg@gmail.com"),
         (re.compile('sra', re.IGNORECASE), "sravyakotaru@gmail.com"),
         (re.compile('bhai|nir', re.IGNORECASE), "nanaya5588@gmail.com"),
@@ -133,7 +133,7 @@ def get_total_score_so_far_for_user(user_id):
     live_data = get_live_match_details()
     live_user_data = get_live_data_for_user(user_id)
 
-    if int(live_data.get('liveMatchId')) == 7925: #Hardcoding for the bug
+    if int(live_data.get('liveMatchId')) == 7942: #Hardcoding for the bug
         return _get_total_points_from_league_details(user_id)
 
     if live_data.get('scoreCalculated', False):

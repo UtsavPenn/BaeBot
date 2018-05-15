@@ -18,3 +18,4 @@ from .top_picks_handler import top_picks
 from .mult_left_handler import mult_left
 from .toss_handler import toss
 from .mom_handler import mom
+from .coinflip_handler import coinflip
