@@ -35,9 +35,6 @@ def get_live_match_details():
 
 
 def _is_score_calculated(live_match_details):
-    if int(live_match_details.get('liveMatchId')) in (7942, ): #Hardcoding due to IPL bug
-        return True
-
     return live_match_details.get('scoreCalculated', False)
 
 

@@ -7,12 +7,19 @@ import boto3
 from bae_bot.ipl_fantasy.data import get_match_id, get_squad_details
 from bae_bot.ipl_fantasy.common import USER_IDS, get_player, get_league_team_name_for_user
 from bae_bot.ipl_fantasy.data import get_match
+from bae_bot.ipl_fantasy.data import get_points_history_for_user
 
+
+def get_points_of_match(history, match_id):
+    for points in history:
+        if points['mId'] == match_id:
+            return sum((v for k, v in points.items() if k.endswith('P')))
 
 def main(event, context):
     squad_history = defaultdict(list)
     current_match_id = get_match_id()
     for user in USER_IDS:
+        points_history = get_points_history_for_user(user)['pointsHistory']
         for match_id in range(7894, current_match_id):
             print("Processing {} {}".format(user, match_id))
 
@@ -32,6 +39,7 @@ def main(event, context):
             squad_details['matchDescription'] = match.description
             squad_details['teams'] = match.teams
             squad_details['numPlayersPlaying'] = len([p for p in players if p.team in match.teams])
+            squad_details['pointsScored'] = get_points_of_match(points_history, match_id)
 
             del squad_details['transfersRemaining']
             del squad_details['stealthList']

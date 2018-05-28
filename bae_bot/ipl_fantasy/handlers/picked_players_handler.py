@@ -7,6 +7,8 @@ from bae_bot.ipl_fantasy.common import (get_player, get_league_team_name_for_use
 
 
 def picked_players(bot, update, args):
+    # bot.send_message(update.message.chat_id, "Stealth for life!")
+    # return
     if not args:
         bot.send_message(update.message.chat_id,
                          "Usage: /pickedplayers <team1> <team2> ...")

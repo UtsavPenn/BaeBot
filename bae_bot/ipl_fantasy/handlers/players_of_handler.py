@@ -15,6 +15,8 @@ def _get_player_name(player, squad_details):
     return player.name
 
 def players_of(bot, update, args):
+    # bot.send_message(update.message.chat_id, "Stealth for life!")
+    # return
     if not args:
         bot.send_message(update.message.chat_id, "Usage: /playersof badri mi")
         return
@@ -44,9 +46,8 @@ def players_of(bot, update, args):
                 continue
             next_opportunity += 1
             if player.team in match.teams:
-                players_table.append((_get_player_name(player, squad_details), next_opportunity))
                 break
-
+        players_table.append((_get_player_name(player, squad_details), next_opportunity))
 
     message = tabulate.tabulate(players_table, headers=['Player', 'nextopportunityin'])
     resp = "Total Players: {} \n".format(len(players_table))
