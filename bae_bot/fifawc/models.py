@@ -17,17 +17,17 @@ class User(Model):
     reserved_amount = NumberAttribute()
 
 
-class BetInfo(Model):
+class EventInfo(Model):
     """
-    BetInfo Model
+    EventInfo Model
     """
 
     class Meta:
-        table_name = os.environ.get("BETINFO_DYNAMODB_TABLE", "com.baebot.dev.betinfo")
+        table_name = os.environ.get("BETINFO_DYNAMODB_TABLE", "com.baebot.dev.eventinfo")
 
-    bet_id = NumberAttribute(hash_key=True)
-    bet_description = UnicodeAttribute()
-    bet_result_choices = ListAttribute()
-    bet_deadline = UTCDateTimeAttribute()
-    bet_outcome = UnicodeAttribute(null=True)
+    event_id = NumberAttribute(hash_key=True)
+    event_description = UnicodeAttribute()
+    event_result_choices = ListAttribute()
+    event_deadline = UTCDateTimeAttribute()
+    event_outcome = UnicodeAttribute(null=True)
 
