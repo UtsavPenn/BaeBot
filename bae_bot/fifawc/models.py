@@ -23,7 +23,7 @@ class EventInfo(Model):
     """
 
     class Meta:
-        table_name = os.environ.get("BETINFO_DYNAMODB_TABLE", "com.baebot.dev.eventinfo")
+        table_name = os.environ.get("EVENTINFO_DYNAMODB_TABLE", "com.baebot.dev.eventinfo")
 
     event_id = NumberAttribute(hash_key=True)
     event_description = UnicodeAttribute()

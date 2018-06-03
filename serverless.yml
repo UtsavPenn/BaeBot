@@ -69,6 +69,7 @@ provider:
     STAGE: ${opt:stage}
     S3_STORAGE_BUCKET: com.baebot.${opt:stage}.storage
     USERS_DYNAMODB_TABLE: com.baebot.${opt:stage}.users
+    EVENTINFO_DYNAMODB_TABLE: com.baebot.${opt:stage}.eventinfo
     #variable1: value1
 
 # you can add packaging information here
