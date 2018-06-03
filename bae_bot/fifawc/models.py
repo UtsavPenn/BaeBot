@@ -16,5 +16,20 @@ class User(Model):
     total_amount = NumberAttribute()
     reserved_amount = NumberAttribute()
 
+class BetsHistory(Model):
+    """
+    BetsHistory model.
+    """
+
+    class Meta:
+        table_name = os.environ.get("BETS_HISTORY_DYNAMODB_TABLE", "com.baebot.dev.bets_history")
+
+    bet_id = UnicodeAttribute(hash_key=True)
+    event_id = NumberAttribute()
+    user_id = UnicodeAttribute()
+    bet_amount = NumAttribute()
+    result = UnicodeAttribute()
+    bet_processed = NumAttribute()
+
 
 
