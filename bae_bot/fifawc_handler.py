@@ -43,7 +43,7 @@ def main(event, context):
         dispatcher = Dispatcher(bot)
         dispatcher.add_handler(CustomCommandHandler('start', start_message))
         dispatcher.add_handler(CustomCommandHandler('join', join))
-        dispatcher.add_handler(CustomCommandHandler('allevents', all_bets, pass_args=True))
+        dispatcher.add_handler(CustomCommandHandler('allevents', all_events, pass_args=True))
 
         data = json.loads(event["body"])
         update = Update.de_json(data, bot)
