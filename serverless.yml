@@ -70,6 +70,7 @@ provider:
     S3_STORAGE_BUCKET: com.baebot.${opt:stage}.storage
     USERS_DYNAMODB_TABLE: com.baebot.${opt:stage}.users
     BETS_HISTORY_DYNAMODB_TABLE: com.baebot.${opt:stage}.bets_history
+    EVENTINFO_DYNAMODB_TABLE: com.baebot.${opt:stage}.eventinfo
     #variable1: value1
 
 # you can add packaging information here
@@ -84,7 +85,7 @@ provider:
 functions:
   main:
     handler: bae_bot.fifawc_handler.main
-    timeout: 45
+    timeout: 29
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
@@ -131,37 +132,36 @@ functions:
 
 resources:
   Resources:
-    UsersTableDynamoDB:
+    UserTableDynamoDB:
       Type: "AWS::DynamoDB::Table"
       Properties:
         AttributeDefinitions:
           -
-            AttributeName: "first_name"
+            AttributeName: "user_id"
             AttributeType: "S"
         KeySchema:
           -
-            AttributeName: "first_name"
+            AttributeName: "user_id"
             KeyType: "HASH"
         ProvisionedThroughput:
           ReadCapacityUnits: "5"
           WriteCapacityUnits: "5"
         TableName: "com.baebot.${opt:stage}.users"
-
-    BetsHistoryTableDynamoDB:
+    EventInfoTableDynamoDB:
       Type: "AWS::DynamoDB::Table"
       Properties:
         AttributeDefinitions:
           -
-            AttributeName: "bet_id"
-            AttributeType: "S"
+            AttributeName: "event_id"
+            AttributeType: "N"
         KeySchema:
           -
-            AttributeName: "bet_id"
+            AttributeName: "event_id"
             KeyType: "HASH"
         ProvisionedThroughput:
           ReadCapacityUnits: "5"
           WriteCapacityUnits: "5"
-        TableName: "com.baebot.${opt:stage}.bets_history"
+        TableName: "com.baebot.${opt:stage}.eventinfo"
 
 plugins:
   - serverless-python-requirements
