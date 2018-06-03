@@ -83,7 +83,7 @@ provider:
 functions:
   main:
     handler: bae_bot.fifawc_handler.main
-    timeout: 45
+    timeout: 29
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
@@ -130,20 +130,36 @@ functions:
 
 resources:
   Resources:
-    UsersTableDynamoDB:
+    UserTableDynamoDB:
       Type: "AWS::DynamoDB::Table"
       Properties:
         AttributeDefinitions:
           -
-            AttributeName: "first_name"
+            AttributeName: "user_id"
             AttributeType: "S"
         KeySchema:
           -
-            AttributeName: "first_name"
+            AttributeName: "user_id"
             KeyType: "HASH"
         ProvisionedThroughput:
           ReadCapacityUnits: "5"
           WriteCapacityUnits: "5"
         TableName: "com.baebot.${opt:stage}.users"
+    BetInfoTableDynamoDB:
+      Type: "AWS::DynamoDB::Table"
+      Properties:
+        AttributeDefinitions:
+          -
+            AttributeName: "bet_id"
+            AttributeType: "N"
+        KeySchema:
+          -
+            AttributeName: "bet_id"
+            KeyType: "HASH"
+        ProvisionedThroughput:
+          ReadCapacityUnits: "5"
+          WriteCapacityUnits: "5"
+        TableName: "com.baebot.${opt:stage}.betinfo"
+
 plugins:
   - serverless-python-requirements
