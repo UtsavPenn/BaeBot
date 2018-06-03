@@ -3,12 +3,7 @@ python-telegram-bot
 tabulate
 munch
 boto3
-fuzzywuzzy
-python-Levenshtein
 cachetools
-pandas
-matplotlib
-seaborn
 arrow
 pytz
 jmespath

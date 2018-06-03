@@ -20,9 +20,7 @@ service: BaeBot # NOTE: update this with your service name
 custom:
   pythonRequirements:
     dockerizePip: true
-    zip: true
   defaultStage: dev
-  defaultRegion: ap-southeast-1
   profiles:
     dev: dev
     prod: prod
@@ -79,7 +77,7 @@ provider:
 
 functions:
   main:
-    handler: bae_bot.handler.main
+    handler: bae_bot.fifawc_handler.main
     timeout: 45
 
 #    The following are a few example events you can configure
@@ -117,13 +115,13 @@ functions:
 #      variable2: value2
 
 # you can add CloudFormation resource templates here
-resources:
- Resources:
-   S3StorageBucket:
-     Type: AWS::S3::Bucket
-     Properties:
-       BucketName: com.baebot.${opt:stage}.storage
-       AccessControl: Private
+#resources:
+# Resources:
+#   S3StorageBucket:
+#     Type: AWS::S3::Bucket
+#     Properties:
+#       BucketName: com.baebot.${opt:stage}.storage
+#       AccessControl: Private
 
 plugins:
   - serverless-python-requirements
