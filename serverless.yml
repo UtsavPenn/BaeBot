@@ -123,5 +123,22 @@ functions:
 #       BucketName: com.baebot.${opt:stage}.storage
 #       AccessControl: Private
 
+resources:
+  Resources:
+    UsersTableDynamoDB:
+      Type: "AWS::DynamoDB::Table"
+      Properties:
+        AttributeDefinitions:
+          -
+            AttributeName: "first_name"
+            AttributeType: "S"
+        KeySchema:
+          -
+            AttributeName: "first_name"
+            KeyType: "HASH"
+        ProvisionedThroughput:
+          ReadCapacityUnits: "5"
+          WriteCapacityUnits: "5"
+        TableName: "com.baebot.${opt:stage}.users"
 plugins:
   - serverless-python-requirements
