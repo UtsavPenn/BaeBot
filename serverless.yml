@@ -44,6 +44,10 @@ provider:
       Action:
         - "s3:*"
       Resource: "*"
+    - Effect: "Allow"
+      Action:
+        - "dynamodb:*"
+      Resource: "*"
    # - Effect: "Allow"
    #   Action:
    #     - "s3:ListBucket"
@@ -64,6 +68,7 @@ provider:
     IPL_ACCESS_TOKEN: ${file(.${self:provider.stage}.secrets.json):IPL_ACCESS_TOKEN}
     STAGE: ${opt:stage}
     S3_STORAGE_BUCKET: com.baebot.${opt:stage}.storage
+    USERS_DYNAMODB_TABLE: com.baebot.${opt:stage}.users
     #variable1: value1
 
 # you can add packaging information here
