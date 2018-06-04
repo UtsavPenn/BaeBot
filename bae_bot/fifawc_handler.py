@@ -20,7 +20,7 @@ from bae_bot.dispatcher import Dispatcher
 
 from bae_bot.fifawc.handlers import (join,
                                      all_events,
-                                     pick)
+                                     place_bet)
 
 log = logging.getLogger(__name__)
 
@@ -29,6 +29,7 @@ START_TEXT = """Hi {first_name}. Here are the commands:
 /start
 /join - Join the League
 /allevents - Show all available bets
+/placebet - Place a bet on an event 
 """
 
 bot = Bot(token=os.environ['TELEGRAM_TOKEN'])
@@ -43,7 +44,7 @@ def main(event, context):
         dispatcher = Dispatcher(bot)
         dispatcher.add_handler(CustomCommandHandler('start', start_message))
         dispatcher.add_handler(CustomCommandHandler('join', join))
-        dispatcher.add_handler(CustomCommandHandler('pick', pick, pass_args=True))
+        dispatcher.add_handler(CustomCommandHandler('placebet', place_bet, pass_args=True))
         dispatcher.add_handler(CustomCommandHandler('allevents', all_events, pass_args=True))
 
         data = json.loads(event["body"])
