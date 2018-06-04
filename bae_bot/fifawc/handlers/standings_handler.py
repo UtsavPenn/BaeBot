@@ -9,5 +9,5 @@ def standings(bot, update, args):
     for user in users:
         _users.append((user.user_id, user.total_amount, user.reserved_amount))
     _users = sorted(_users, key=lambda x: x[1])
-    _users.insert(0, ("user_id", "total_amount", 'reserved_amount'))
+    _users.insert(0, ("user", "total", 'reserved'))
     bot.send_message(update.message.chat_id, tabulate.tabulate(_users))
