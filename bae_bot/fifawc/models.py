@@ -16,6 +16,7 @@ class User(Model):
     total_amount = NumberAttribute()
     reserved_amount = NumberAttribute()
 
+
 class BetsHistory(Model):
     """
     BetsHistory model.
@@ -27,9 +28,9 @@ class BetsHistory(Model):
     bet_id = UnicodeAttribute(hash_key=True)
     event_id = NumberAttribute()
     user_id = UnicodeAttribute()
-    bet_amount = NumAttribute()
+    bet_amount = NumberAttribute()
     result = UnicodeAttribute()
-    bet_processed = NumAttribute()
+    bet_processed = NumberAttribute()
 
 
 class EventInfo(Model):
@@ -45,4 +46,3 @@ class EventInfo(Model):
     event_result_choices = ListAttribute()
     event_deadline = UTCDateTimeAttribute()
     event_outcome = UnicodeAttribute(null=True)
-
