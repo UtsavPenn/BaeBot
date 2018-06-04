@@ -19,8 +19,8 @@ from bae_bot.wrappers import CustomCommandHandler
 from bae_bot.dispatcher import Dispatcher
 
 from bae_bot.fifawc.handlers import (join,
-                                    all_events,
-				    pick)
+                                     all_events,
+                                     pick)
 
 log = logging.getLogger(__name__)
 
@@ -40,11 +40,10 @@ def start_message(bot, update):
 
 def main(event, context):
     try:
-
         dispatcher = Dispatcher(bot)
         dispatcher.add_handler(CustomCommandHandler('start', start_message))
         dispatcher.add_handler(CustomCommandHandler('join', join))
-	dispatcher.add_handler(CustomCommandHandler('pick', pick,pass_args=True)))
+        dispatcher.add_handler(CustomCommandHandler('pick', pick, pass_args=True))
         dispatcher.add_handler(CustomCommandHandler('allevents', all_events, pass_args=True))
 
         data = json.loads(event["body"])
