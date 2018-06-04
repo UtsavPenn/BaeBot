@@ -8,6 +8,7 @@ def all_events(bot, update, args):
         all.append((event.event_id,
                     event.event_description,
                     ",".join(event.event_result_choices),
-                    str(event.event_deadline)))
+                    event.event_deadline))
+    all = sorted(all, key=lambda x: x[3].timestamp())
     bot.send_message(update.message.chat_id, tabulate.tabulate(all))
 
