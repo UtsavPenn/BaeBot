@@ -1,6 +1,6 @@
 import os
 
-from pynamodb.attributes import UnicodeAttribute, NumberAttribute, ListAttribute, UTCDateTimeAttribute
+from pynamodb.attributes import UnicodeAttribute, NumberAttribute, ListAttribute, UTCDateTimeAttribute, BooleanAttribute
 from pynamodb.models import Model
 
 
@@ -30,7 +30,7 @@ class BetsHistory(Model):
     user_id = UnicodeAttribute()
     bet_amount = NumberAttribute()
     result = UnicodeAttribute()
-    bet_processed = NumberAttribute()
+    bet_processed = BooleanAttribute()
 
 
 class EventInfo(Model):

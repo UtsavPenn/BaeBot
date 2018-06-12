@@ -1,33 +1,56 @@
 import uuid
+
+from bae_bot.fifawc.models import User
 from pynamodb.exceptions import DoesNotExist
 from bae_bot.fifawc.models import BetsHistory, EventInfo
-from datetime import datetime,timezone
+import arrow
+
 
 def place_bet(bot, update, args):
     user = update.effective_user.first_name
-   
-    if len(args) < 3 or not args :
-      bot.send_message(update.message.chat_id, "Usage: /pick 1234 ARG 10")
-      return
-    
+
     try:
-      event = EventInfo.get(int(args[0]))
+        user_info = User.get(user)
     except DoesNotExist:
-      bot.send_message(update.message.chat_id, "Event id is not for a valid event.")
-      return
+        bot.send_message(update.message.chat_id, "User {} not registered".format(user))
+        return
 
-    if not args[1] in event.event_result_choices:
-      bot.send_message(update.message.chat_id, "Prediction choice not present in list of probable outcomes for the event.")
-      return
+    if len(args) < 3:
+        bot.send_message(update.message.chat_id, "Usage: /pick 1234 ARG 10")
+        return
 
-    dt = datetime.now()
-    
-    if dt.replace(tzinfo=timezone.utc) > event.event_deadline:
-      bot.send_message(update.message.chat_id, "Oops.Event deadline already passed :(")
+    event_id, choice, bet_amount = int(args[0]), args[1].upper(), int(args[2])
+    try:
+        event = EventInfo.get(int(event_id))
+    except DoesNotExist:
+        bot.send_message(update.message.chat_id, "Event id is not for a valid event.")
+        return
 
-    betId =  str(uuid.uuid4())
-    bet = BetsHistory(bet_id=betId, event_id=int(args[0]), user_id=user, bet_amount=int(args[2]),result=args[1],bet_processed=0)
+    if not choice in event.event_result_choices:
+        bot.send_message(update.message.chat_id,
+                         "Prediction choice {} not one of {}.".format(choice, event.event_result_choices))
+        return
+
+    if arrow.utcnow() > arrow.get(event.event_deadline):
+        bot.send_message(update.message.chat_id, "Oops.Event deadline already passed :(")
+        return
+
+    buying_power = user_info.total_amount - user_info.reserved_amount
+    if int(bet_amount) > buying_power:
+        bot.send_message(update.message.chat_id, "You cannot bet more than your buying power: {}".format(buying_power))
+        return
+
+    betId = str(uuid.uuid4())
+    bet = BetsHistory(bet_id=betId,
+                      event_id=int(event_id),
+                      user_id=user,
+                      bet_amount=int(bet_amount),
+                      result=choice,
+                      bet_processed=False)
     bet.save()
-    resp = "Bet succesfully placed on "+ args[1] +" for " + event.event_description 
-    bot.send_message(update.message.chat_id, resp)
 
+    user_info.reserved_amount += int(bet_amount)
+    user_info.save()
+
+    resp = "Bet of {} successfully placed on {} for {}".format(bet_amount, choice, event.event_description)
+    bot.send_message(update.message.chat_id, resp)

@@ -21,7 +21,8 @@ from bae_bot.dispatcher import Dispatcher
 from bae_bot.fifawc.handlers import (join,
                                      all_events,
                                      place_bet,
-                                     standings)
+                                     standings,
+                                     event_info)
 
 log = logging.getLogger(__name__)
 
@@ -29,7 +30,8 @@ START_TEXT = """Hi {first_name}. Here are the commands:
 
 /start
 /join - Join the League
-/allevents - Show all available bets
+/events - Show all available bets
+/eventinfo - Show all the bets for that event
 /placebet - Place a bet on an event 
 /standings - Show all standings till now
 """
@@ -47,7 +49,8 @@ def main(event, context):
         dispatcher.add_handler(CustomCommandHandler('start', start_message))
         dispatcher.add_handler(CustomCommandHandler('join', join))
         dispatcher.add_handler(CustomCommandHandler('placebet', place_bet, pass_args=True))
-        dispatcher.add_handler(CustomCommandHandler('allevents', all_events, pass_args=True))
+        dispatcher.add_handler(CustomCommandHandler('events', all_events, pass_args=True))
+        dispatcher.add_handler(CustomCommandHandler('eventinfo', event_info, pass_args=True))
         dispatcher.add_handler(CustomCommandHandler('standings', standings, pass_args=True))
 
         data = json.loads(event["body"])

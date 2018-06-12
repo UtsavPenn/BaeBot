@@ -162,6 +162,21 @@ resources:
           ReadCapacityUnits: "5"
           WriteCapacityUnits: "5"
         TableName: "com.baebot.${opt:stage}.eventinfo"
+    BetsHistoryDynamoDB:
+      Type: "AWS::DynamoDB::Table"
+      Properties:
+        AttributeDefinitions:
+          -
+            AttributeName: "bet_id"
+            AttributeType: "S"
+        KeySchema:
+          -
+            AttributeName: "bet_id"
+            KeyType: "HASH"
+        ProvisionedThroughput:
+          ReadCapacityUnits: "5"
+          WriteCapacityUnits: "5"
+        TableName: "com.baebot.${opt:stage}.bets_history"
 
 plugins:
   - serverless-python-requirements
