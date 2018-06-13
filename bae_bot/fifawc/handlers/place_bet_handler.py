@@ -16,7 +16,7 @@ def place_bet(bot, update, args):
         return
 
     if len(args) < 3:
-        bot.send_message(update.message.chat_id, "Usage: /pick 1234 ARG 10")
+        bot.send_message(update.message.chat_id, "Usage: /placebet <event_id> ARG <amount>")
         return
 
     event_id, choice, bet_amount = int(args[0]), args[1].upper(), int(args[2])
