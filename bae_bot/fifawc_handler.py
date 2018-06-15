@@ -1,3 +1,4 @@
+
 try:
     import unzip_requirements
 except ImportError:
@@ -22,7 +23,9 @@ from bae_bot.fifawc.handlers import (join,
                                      all_events,
                                      place_bet,
                                      standings,
-                                     event_info)
+                                     event_info,
+                                     set_outcome,
+                                     process_bets)
 
 log = logging.getLogger(__name__)
 
@@ -52,6 +55,8 @@ def main(event, context):
         dispatcher.add_handler(CustomCommandHandler('events', all_events, pass_args=True))
         dispatcher.add_handler(CustomCommandHandler('eventinfo', event_info, pass_args=True))
         dispatcher.add_handler(CustomCommandHandler('standings', standings, pass_args=True))
+        dispatcher.add_handler(CustomCommandHandler('setoutcome', set_outcome, pass_args=True))
+        dispatcher.add_handler(CustomCommandHandler('processbets', process_bets))
 
         data = json.loads(event["body"])
         update = Update.de_json(data, bot)
