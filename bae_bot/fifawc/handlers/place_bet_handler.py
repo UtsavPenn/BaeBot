@@ -19,7 +19,7 @@ def place_bet(bot, update, args):
         bot.send_message(update.message.chat_id, "Usage: /placebet <event_id> ARG <amount>")
         return
 
-    event_id, choice, bet_amount = int(args[0]), args[1].upper(), int(args[2])
+    event_id, choice, bet_amount = int(args[0]), args[1].upper(), float(args[2])
     try:
         event = EventInfo.get(int(event_id))
     except DoesNotExist:
@@ -35,8 +35,12 @@ def place_bet(bot, update, args):
         bot.send_message(update.message.chat_id, "Oops.Event deadline already passed :(")
         return
 
+    if bet_amount < 0:
+        bot.send_message(update.message.chat_id, "Amount needs to be > 0")
+        return
+
     buying_power = user_info.total_amount - user_info.reserved_amount
-    if int(bet_amount) > buying_power:
+    if bet_amount > buying_power:
         bot.send_message(update.message.chat_id, "You cannot bet more than your buying power: {}".format(buying_power))
         return
 
@@ -44,12 +48,12 @@ def place_bet(bot, update, args):
     bet = BetsHistory(bet_id=betId,
                       event_id=int(event_id),
                       user_id=user,
-                      bet_amount=int(bet_amount),
+                      bet_amount=bet_amount,
                       result=choice,
                       bet_processed=False)
     bet.save()
 
-    user_info.reserved_amount += int(bet_amount)
+    user_info.reserved_amount += bet_amount
     user_info.save()
 
     resp = "Bet of {} successfully placed on {} for {}".format(bet_amount, choice, event.event_description)

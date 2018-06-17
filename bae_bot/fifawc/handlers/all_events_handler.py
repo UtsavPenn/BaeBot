@@ -13,8 +13,8 @@ def all_events(bot, update, args):
                     ",".join(event.event_result_choices),
                     event.event_deadline))
     all = sorted(all, key=lambda x: arrow.get(x[3]).timestamp)
-    all.insert(0, ("event_id", "description", "event_choices", "deadline"))
     if args:
         all = all[:int(args[0])]
+    all.insert(0, ("event_id", "description", "event_choices", "deadline"))
     bot.send_message(update.message.chat_id, tabulate.tabulate(all[:25]))
 

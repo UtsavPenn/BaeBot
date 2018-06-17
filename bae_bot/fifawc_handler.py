@@ -25,7 +25,8 @@ from bae_bot.fifawc.handlers import (join,
                                      standings,
                                      event_info,
                                      set_outcome,
-                                     process_bets)
+                                     process_bets,
+                                     active_bets)
 
 log = logging.getLogger(__name__)
 
@@ -35,8 +36,9 @@ START_TEXT = """Hi {first_name}. Here are the commands:
 /join - Join the League
 /events - Show all available bets
 /eventinfo - Show all the bets for that event
-/placebet - Place a bet on an event 
+/placebet or /p - Place a bet on an event 
 /standings - Show all standings till now
+/active - show active bets
 """
 
 bot = Bot(token=os.environ['TELEGRAM_TOKEN'])
@@ -52,11 +54,13 @@ def main(event, context):
         dispatcher.add_handler(CustomCommandHandler('start', start_message))
         dispatcher.add_handler(CustomCommandHandler('join', join))
         dispatcher.add_handler(CustomCommandHandler('placebet', place_bet, pass_args=True))
+        dispatcher.add_handler(CustomCommandHandler('p', place_bet, pass_args=True))
         dispatcher.add_handler(CustomCommandHandler('events', all_events, pass_args=True))
         dispatcher.add_handler(CustomCommandHandler('eventinfo', event_info, pass_args=True))
         dispatcher.add_handler(CustomCommandHandler('standings', standings, pass_args=True))
         dispatcher.add_handler(CustomCommandHandler('setoutcome', set_outcome, pass_args=True))
         dispatcher.add_handler(CustomCommandHandler('processbets', process_bets))
+        dispatcher.add_handler(CustomCommandHandler('active', active_bets))
 
         data = json.loads(event["body"])
         update = Update.de_json(data, bot)
