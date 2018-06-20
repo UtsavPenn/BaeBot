@@ -26,7 +26,8 @@ from bae_bot.fifawc.handlers import (join,
                                      event_info,
                                      set_outcome,
                                      process_bets,
-                                     active_bets)
+                                     active_bets,
+                                     score)
 
 log = logging.getLogger(__name__)
 
@@ -39,6 +40,7 @@ START_TEXT = """Hi {first_name}. Here are the commands:
 /placebet or /p - Place a bet on an event 
 /standings - Show all standings till now
 /active - show active bets
+/score - show fifa scores
 """
 
 bot = Bot(token=os.environ['TELEGRAM_TOKEN'])
@@ -61,6 +63,7 @@ def main(event, context):
         dispatcher.add_handler(CustomCommandHandler('setoutcome', set_outcome, pass_args=True))
         dispatcher.add_handler(CustomCommandHandler('processbets', process_bets))
         dispatcher.add_handler(CustomCommandHandler('active', active_bets))
+        dispatcher.add_handler(CustomCommandHandler('score', score))
 
         data = json.loads(event["body"])
         update = Update.de_json(data, bot)

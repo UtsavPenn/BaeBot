@@ -26,7 +26,7 @@ def place_bet(bot, update, args):
         bot.send_message(update.message.chat_id, "Event id is not for a valid event.")
         return
 
-    if not choice in event.event_result_choices:
+    if choice not in event.event_result_choices:
         bot.send_message(update.message.chat_id,
                          "Prediction choice {} not one of {}.".format(choice, event.event_result_choices))
         return
@@ -35,7 +35,7 @@ def place_bet(bot, update, args):
         bot.send_message(update.message.chat_id, "Oops.Event deadline already passed :(")
         return
 
-    if bet_amount < 0:
+    if bet_amount <= 0:
         bot.send_message(update.message.chat_id, "Amount needs to be > 0")
         return
 
